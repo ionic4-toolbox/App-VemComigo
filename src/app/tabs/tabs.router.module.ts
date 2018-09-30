@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TabsPage } from './tabs.page';
-import { HomePage } from '../home/home.page';
 import { AboutPage } from '../about/about.page';
+import { BuscaPage } from '../busca/busca.page';
 import { ContactPage } from '../contact/contact.page';
+import { PerfilPage } from '../perfil/perfil.page';
+import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
@@ -13,13 +14,18 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/tabs/(home:home)',
+        redirectTo: '/tabs/(busca:busca)',
         pathMatch: 'full',
       },
       {
-        path: 'home',
-        outlet: 'home',
-        component: HomePage
+        path: 'perfil',
+        outlet: 'perfil',
+        component: PerfilPage
+      },
+      {
+        path: 'busca',
+        outlet: 'busca',
+        component: BuscaPage
       },
       {
         path: 'about',
@@ -35,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/home/tabs/(home:home)',
+    redirectTo: '/home/tabs/(busca:busca)',
     pathMatch: 'full'
   }
 ];

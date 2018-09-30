@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-// import { AuthenticationService } from '../../services/authentication.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-// import { User } from '../../model/user.model';
-import { LoadingController, AlertController } from '@ionic/angular';
-
+import { AlertController } from '@ionic/angular';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -15,15 +13,13 @@ export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
   submitted = false;
-  // user: User[];
   credentias: { email: any; password: any };
   loading: any;
 
   constructor(
     private fb: FormBuilder,
-    // private authService: AuthenticationService,
-    private loadingController: LoadingController,
-    private alertController: AlertController,
+    private authService: AuthenticationService,
+    public alertController: AlertController,
     private navCtrl: NavController
   ) {
 
@@ -35,9 +31,52 @@ export class LoginPage implements OnInit {
 
   ngOnInit() { }
 
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Atenção',
+      // subHeader: 'Subtitle',
+      message: 'This is an alert message.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.loginForm.controls; }
+
   onLogin() {
-    console.log('Teste');
-    this.navCtrl.navigateRoot('/home');
+
+    this.submitted = true;
+    this.credentias = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
+
+    if (this.loginForm.invalid) {
+      return;
+    } else {
+
+      this.authService.signWithEmail(this.credentias).then(
+        () => {
+          console.log('Logado');
+        },
+        error => {
+          console.log('Erros encontrados: ', error.code);
+
+          if (error.code === 'auth/wrong-password') {
+            console.log(error.message);
+          } else if ( error.code === 'auth/user-not-found' ) {
+            console.log(error.message);
+          } else {
+            console.log(error.message);
+          }
+        }
+      );
+      // this.presentAlert();
+      this.navCtrl.navigateRoot('/home');
+    }
   }
 
 }

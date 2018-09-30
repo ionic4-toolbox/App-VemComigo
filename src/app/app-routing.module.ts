@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   { 
@@ -9,7 +10,13 @@ const routes: Routes = [
   },
   { 
     path: 'home', 
-    loadChildren: './tabs/tabs.module#TabsPageModule'
+    canActivate: [AuthGuardService],
+    loadChildren: './tabs/tabs.module#TabsPageModule',
+
+  },
+  { 
+    path: 'register',
+    loadChildren: './register/register.module#RegisterPageModule'
   },
   { 
     path: 'login',
@@ -19,7 +26,9 @@ const routes: Routes = [
     path: '**', 
     loadChildren: './page-not-found/page-not-found.module#PageNotFoundPageModule'
   },
-  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' }
+  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
+  { path: 'Busca', loadChildren: './busca/busca.module#BuscaPageModule' }
 ];
 
 @NgModule({

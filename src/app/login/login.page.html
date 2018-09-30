@@ -1,15 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-<ion-button (click)="onLogin()">
-  Entrar
-</ion-button>
-</ion-content> -->
-
 <ion-content>
 
   <div class="cabecalho">
@@ -25,7 +13,6 @@
           <ion-col>
             <ion-item margin-top>
               <ion-input type="text" placeholder="Email" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
-              <!-- [class.invalid]="!loginForm.controls.email.valid && (loginForm.controls.email.dirty || submitAttempt)" -->
             </ion-item>
             <ion-item *ngIf="submitted && f.email.errors" class="ion-invalid">
               <div class="msgInvalid" *ngIf="f.email.errors.required">E-mail é obrigatório</div>
@@ -39,8 +26,7 @@
               <div class="msgInvalid" *ngIf="f.password.errors.minlength">A senha deve ter pelo menos 6 caracteres.</div>
             </ion-item>
           </ion-col>
-        </ion-row>
-        
+        </ion-row>        
         <ion-row>
           <ion-col>
             <ion-button button expand="block" shape="round" type="submit">Entrar</ion-button>

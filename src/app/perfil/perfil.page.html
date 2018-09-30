@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="start" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Perfil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nome*</ion-label>
+        <ion-input type="text" value="Maira"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">SobreNome*</ion-label>
+        <ion-input type="text" value="Mendonça"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Turma*</ion-label>
+        <ion-input type="text" value="1B"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Horário de saída*</ion-label>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">E-mail*</ion-label>
+        <ion-input type="text" value="maira@gmail.com"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Telefone*</ion-label>
+        <ion-input type="text" value="(61) 9999 - 9999"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div padding>
+      <ion-button button shape="round" expand="block" type="submit">Salvar</ion-button>
+    </div>
+  </form>
+
+</ion-content>
