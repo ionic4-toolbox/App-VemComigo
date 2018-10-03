@@ -6,8 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
-import { ContactPageModule } from '../contact/contact.module';
-import { AboutPageModule } from '../about/about.module';
+import { QuemSomosPageModule } from '../quem-somos/quem-somos.module';
+import { AjudaPageModule } from '../ajuda/ajuda.module';
 import { PerfilPageModule } from '../perfil/perfil.module';
 import { BuscaPageModule } from '../busca/busca.module';
 
@@ -18,9 +18,9 @@ import { BuscaPageModule } from '../busca/busca.module';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    AboutPageModule,
+    AjudaPageModule,
     BuscaPageModule,
-    ContactPageModule,
+    QuemSomosPageModule,
     PerfilPageModule
   ],
   declarations: [TabsPage]

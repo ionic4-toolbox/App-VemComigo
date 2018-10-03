@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AboutPage } from '../about/about.page';
+import { AjudaPage } from '../ajuda/ajuda.page';
 import { BuscaPage } from '../busca/busca.page';
-import { ContactPage } from '../contact/contact.page';
 import { PerfilPage } from '../perfil/perfil.page';
 import { TabsPage } from './tabs.page';
+import { QuemSomosPage } from '../quem-somos/quem-somos.page';
 
 const routes: Routes = [
   {
@@ -28,14 +28,14 @@ const routes: Routes = [
         component: BuscaPage
       },
       {
-        path: 'about',
-        outlet: 'about',
-        component: AboutPage
+        path: 'ajuda',
+        outlet: 'ajuda',
+        component: AjudaPage
       },
       {
-        path: 'contact',
-        outlet: 'contact',
-        component: ContactPage
+        path: 'quem-somos',
+        outlet: 'quem-somos',
+        component: QuemSomosPage
       }
     ]
   },
