@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { PerfilPage } from './perfil.page';
+import { UserService } from '../service/user.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { PerfilPage } from './perfil.page';
       }
     ])
   ],
+  providers: [UserService],
   declarations: [PerfilPage]
 })
 export class PerfilPageModule {}

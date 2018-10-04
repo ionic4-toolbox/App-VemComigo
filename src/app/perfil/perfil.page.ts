@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
 import { Router } from '@angular/router';
-import { AuthenticationService } from "../service/authentication.service";
 import { Observable } from "rxjs";
 import { User } from "../models/user.model";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { UserService } from "../service/user.service";
+import { AuthenticationService } from "../service/authentication.service";
 
 @Component({
   selector: "app-perfil",
@@ -20,6 +21,7 @@ export class PerfilPage {
 
   constructor(
     private fb: FormBuilder,
+    private userService: UserService,
     private authenticationService: AuthenticationService,
     private router: Router
   ) {
@@ -43,6 +45,7 @@ export class PerfilPage {
       return;
     } else {
       console.log('Cadastrar perfil: ', this.perfilForm.value);
+      this.userService.createUsers(this.perfilForm.value); 
     }
 
   }  
