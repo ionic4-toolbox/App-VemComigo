@@ -16,7 +16,7 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
-import { AuthGuardService } from './services/auth-guard.service';
+import { AuthGuardService } from './service/auth-guard.service';
 
 
 @NgModule({

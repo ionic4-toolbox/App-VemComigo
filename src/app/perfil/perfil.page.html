@@ -15,31 +15,31 @@
 </ion-header>
 
 <ion-content padding>
-  <form novalidate>
+  <form [formGroup]="perfilForm" (ngSubmit)="onCreate()" novalidate>
     <ion-list>
       <ion-item>
         <ion-label position="floating">Nome*</ion-label>
-        <ion-input type="text" value="Maira"></ion-input>
+        <ion-input type="text" value="Maira" formControlName="nome"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">SobreNome*</ion-label>
-        <ion-input type="text" value="Mendonça"></ion-input>
+        <ion-input type="text" value="Mendonça" formControlName="sobrenome"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Turma*</ion-label>
-        <ion-input type="text" value="1B"></ion-input>
+        <ion-input type="text" value="1B" formControlName="turma"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Horário de saída*</ion-label>
-        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm"></ion-datetime>
+        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" formControlName="horario"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="floating">E-mail*</ion-label>
-        <ion-input type="text" value="maira@gmail.com"></ion-input>
+        <ion-input type="text" value="maira@gmail.com" formControlName="email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Telefone*</ion-label>
-        <ion-input type="text" value="(61) 9999 - 9999"></ion-input>
+        <ion-input type="text" value="(61) 9999 - 9999" formControlName="telefone"></ion-input>
       </ion-item>
     </ion-list>
     <div padding>
