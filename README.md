@@ -3,9 +3,9 @@
 ## Visão geral
 Aplicativo para integração de mulheres.
 
-## Como começar
-
+## Construindo e Testando
 **Contrução**
 ```
 ./gradlew build
 ```
+Como começar
