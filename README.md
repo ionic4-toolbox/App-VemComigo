@@ -26,12 +26,12 @@ Para testar diretamente no celular você precisa habilitar a depuração usb no 
 
 Apos habilitar a depuração usb é hora de conectar o cabo usb no celular e plugar no pc/notebook. Feito isso rodar os comandos abaixo:
 
-O comando baixo gera a plataforma android para o aplicativo no projeto ionic (executar apenas uma vez):
+**O comando baixo gera a plataforma android para o aplicativo no projeto ionic (executar apenas uma vez):**
 
 ```sh
 ionic platform add android
 ```
-O comando abaixo gera um release que pode ser executada diretamente no celular
+**O comando abaixo gera um release que pode ser executada diretamente no celular**
 
 ```sh
 ionic cordova run android --device
