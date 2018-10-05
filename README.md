@@ -37,3 +37,7 @@ ionic cordova run android --device
 ```
 Se tudo estiver ok. Então o apk será instalado no celular e você podera verificar o aplicativo rodando diretamente no celular.
 
+Mais informaçes de como depurar aplicativo ionic no celular. Por favor! Ler o artigo abaixo:
+
+[Tutorial depurar aplicativo ionic no celular](https://medium.com/@coderonfleek/debugging-an-ionic-android-app-using-chrome-dev-tools-6e139b79e8d2)
+
