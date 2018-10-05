@@ -20,11 +20,17 @@
 }
 
 .md form .item-native.sc-ion-item-md,  .ios form .item-native.sc-ion-item-ios {
-  border-width: 2px;
-  border-color:  #22a4ad;
+  border-width: 1px;
+  border-color:  #ced9dc;
   border-style:solid;
   border-radius:20px;
+  box-shadow: inset 0 0 1em white, 0 0 1em #ced9dc;
 }
+
+.button-native.sc-ion-button-m{
+  box-shadow: inset 0 0 1em white, 0 0 1em #ced9dc!important;
+}
+
 
 .md form .ion-invalid .item-native.sc-ion-item-md, .ios form .ion-invalid .item-native.sc-ion-item-ios {
   border:none;
@@ -33,4 +39,9 @@
 
 .cursor-pointer{
   cursor:pointer;
+}
+
+
+.toolbar-title.sc-ion-title.sc-ion-title-s{
+  color:#ef7374!important;
 }
