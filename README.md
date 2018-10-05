@@ -5,7 +5,7 @@ Aplicativo para integração de mulheres.
 
 ## Como começar
 
-**Building**
+**Contrução**
 ```
 ./gradlew build
 ```
