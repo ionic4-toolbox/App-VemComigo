@@ -3,23 +3,17 @@
 ## Visão geral
 Aplicativo para integração de mulheres.
 
+## Iniciando a aplicação
+
 ## Construindo e Testando
-**Building**
+**Construindo**
 ```
-./gradlew build
+ng build --prod
 ```
-**Run Tests**
+**Rodando Testes**
 ```
-./gradlew test
-```
-
-**Run Integration Tests**
-```
-./gradlew integrationTest
+ng test
 ```
 
-**Run All Tests**
-```
-./gradlew testAll
-```
+
 
