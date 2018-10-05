@@ -23,8 +23,16 @@ Para testar diretamente no celular você precisa habilitar a depuração usb no 
 
 [Habilitando depuração USB no celular android](https://www.androidpit.com.br/como-ativar-depuracao-usb-android)
 
+Apos habilitar a depuração usb é hora de conectar o cabo usb no celular e plugar no pc/notebook. Feito isso rodar os comandos abaixo:
 
+O comando baixo gera a plataforma android para o aplicativo:
+
+```sh
+ionic platform add android
 ```
-ng test
+O comando abaixo gera um release que pode ser executada diretamente no celular
+
+```sh
+ionic platform add android
 ```
 
