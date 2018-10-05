@@ -4,6 +4,7 @@
 Aplicativo para integração de mulheres.
 
 ## Iniciando a aplicação
+
 ```
 ng serve
 ```
