@@ -7,9 +7,9 @@ Aplicativo para integração de mulheres.
 ```
 ng serve
 ```
-**Rodando Testes**
+**Criando versão de produção**
 ```
-  ng build --prod
+ng build --prod
 ```
 **Rodando Testes**
 ```
