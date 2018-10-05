@@ -4,7 +4,22 @@
 Aplicativo para integração de mulheres.
 
 ## Construindo e Testando
-**Contrução**
+**Building**
 ```
-npm start
+./gradlew build
 ```
+**Run Tests**
+```
+./gradlew test
+```
+
+**Run Integration Tests**
+```
+./gradlew integrationTest
+```
+
+**Run All Tests**
+```
+./gradlew testAll
+```
+
