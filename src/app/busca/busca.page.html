@@ -1,16 +1,38 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Busca</ion-title>
+    <ion-title class="titulos-page">#Partiu achar uma amiga</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="logout()">
         <ion-icon slot="start" name="exit"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content padding>
-  <ion-searchbar></ion-searchbar>
+<ion-content padding class="content">
+  
+  <ion-title class="titulos-page">#Partiu achar uma amiga</ion-title>
+
+  <div class="imgBuscar">
+    <img src="assets/img/avatar-finn.png" alt="">
+    <div class="imgSearch">
+        <ion-icon name="search"></ion-icon>
+        <span>Buscar</span>
+    </div>
+  </div>
+
+  <div class="btn-alterar-destino">
+    <ion-button fill="outline" expand="block" shape="round">
+      Alterar destino
+    </ion-button>
+  </div>
+
+  <div class="ajuda-usuario">
+    <ion-icon name="help-circle-outline"></ion-icon>
+    <span>Preciso de ajuda</span>
+  </div>
+
+  <!-- <ion-searchbar></ion-searchbar>a
   <ion-list>
     <ion-list-header>
       <ion-label>Resultados encontrados</ion-label>
@@ -20,5 +42,5 @@
     <ion-item>Item 3</ion-item>
     <ion-item>Item 4</ion-item>
     <ion-item>Item 5</ion-item>
-  </ion-list>
+  </ion-list> -->
 </ion-content>
