@@ -6,7 +6,7 @@
 
 <ion-content padding-top>
 
-  <!-- <ion-list class="accordion-list">
+  <ion-list class="accordion-list">
     <ion-list *ngFor="let item of information; let i = index" no-lines no-padding>
     
       <ion-item (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
@@ -23,12 +23,6 @@
      
       
     </ion-list>
-  </ion-list> -->
-
-  <ion-virtual-scroll [information]="information">
-      <ion-item *virtualItem="let item">
-        {{ item }}
-      </ion-item>
-    </ion-virtual-scroll>
+  </ion-list>
 
 </ion-content>
