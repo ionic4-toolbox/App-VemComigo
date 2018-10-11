@@ -18,6 +18,7 @@ import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore
 import { environment } from '../environments/environment';
 import { AuthGuardService } from './service/auth-guard.service';
 
+import { Facebook } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [AppComponent],

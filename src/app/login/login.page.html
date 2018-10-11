@@ -26,7 +26,7 @@
               <div class="msgInvalid" *ngIf="f.password.errors.minlength">A senha deve ter pelo menos 6 caracteres.</div>
             </ion-item>
           </ion-col>
-        </ion-row>        
+        </ion-row>
         <ion-row>
           <ion-col>
             <ion-button button expand="block" shape="round" type="submit">Entrar</ion-button>
@@ -42,23 +42,24 @@
     </form>
   </div>
 
-  <ion-grid>
-    <ion-row justify-content-center>
-      <ion-col size="8">
+  <ion-grid class="cadFacebook">
+    <ion-row>
+      <ion-col size="12">
         <ion-list>
-          <!-- 
-            <ion-item (click)="loginGoogle()" class="cursor-pointer">
+          <!-- <ion-item (click)="loginGoogle()" class="cursor-pointer">
+            <ion-icon name="logo-facebook"></ion-icon>
+            Cadastrar com Facebook
+          </ion-item> -->
+          <ion-item (click)="loginFacebook()">
+            <ion-img src="assets/img/icon-fb.png" style="width: 30px;"></ion-img>
+            <ion-label>Cadastrar com Facebook</ion-label>
+          </ion-item>
+<!-- 
+          <ion-button expand="full" (click)="loginFacebook()">
+              <ion-img src="assets/img/icon-fb.png" style="width: 30px;"></ion-img>
+              login com facebook
+          </ion-button> -->
 
-              <ion-icon name="logo-facebook"></ion-icon>
-              Cadastrar com Facebook
-            </ion-item>
-           -->
-          <!-- 
-            <ion-item (click)="loginGoogle()" class="cursor-pointer">
-              <ion-icon name="logo-google"></ion-icon>
-              Cadastrar com google
-            </ion-item> 
-          -->
         </ion-list>
       </ion-col>
     </ion-row>
