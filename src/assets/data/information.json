@@ -29,7 +29,17 @@
                     "price": "$25"
                 }
             ]
-        },        
+        }, 
+        {
+            "name": "Como achar uma amiga ?",
+            "children": [
+                {
+                    "name": "Special Academy Pizza",
+                    "information": " Landjaeger fatback shank frankfurter, tongue shoulder ham strip steak pancetta pork short loin corned beef short ribs biltong cow",
+                    "price": "$25"
+                }
+            ]
+        },       
         {
             "name": "Como deletar o Perfil?",
             "children": [
