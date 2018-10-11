@@ -11,10 +11,31 @@ ion-button {
     color: #000;
     margin-bottom: 4px;
 }
+
+.border-radius{
+    border-radius:9px;
+}
+
+ .section-active {
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+
 .section-active {
     background: #ffc400;
     color: #fff;
+
 }
+
+.float-right{
+    margin-left:auto;
+    order:2;
+}
+
+.hover-click{cursor:pointer;}
 
 .child {
     background: #e8e7e6;
@@ -30,4 +51,11 @@ ion-button {
 }
 .list {
     margin-bottom: 4px;
+}
+
+.accordion-list .list-border{
+border: solid 1px;
+padding: 0px;
+border-radius: 10px;
+border-color: #3880ff;
 }
