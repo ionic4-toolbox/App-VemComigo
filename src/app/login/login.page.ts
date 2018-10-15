@@ -80,7 +80,7 @@ export class LoginPage implements OnInit {
   }
 
   loginFacebook() {
-      console.log('Login com facebook');
+    console.log('Login com facebook');
   }
 
 }

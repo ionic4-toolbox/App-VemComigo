@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BuscaPage } from './busca.page';
+import { CadastroUsuarioPage } from './cadastro-usuario.page';
 import { DestinoService } from '../service/destinos.service';
 
 const routes: Routes = [
   {
     path: '',
-    component: BuscaPage
+    component: CadastroUsuarioPage
   }
 ];
 
@@ -19,10 +19,11 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [BuscaPage],
+  declarations: [CadastroUsuarioPage],
   providers: [DestinoService]
 })
-export class BuscaPageModule {}
+export class CadastroUsuarioPageModule {}

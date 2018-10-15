@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from 'firebase';
 
+export interface Item { name: string; }
+
 @Injectable()
 
 export class UserService {
@@ -11,12 +13,20 @@ export class UserService {
     // colecction
     private _userCollection: AngularFirestoreCollection<User>;
 
+    private itemsCollection: AngularFirestoreCollection<Item>;
+    items: Observable<Item[]>;
+
     // Observables
     users: Observable<User[]>;
     countItems: number;
 
-    constructor(private _af: AngularFirestore) {
+    constructor(
+        private _af: AngularFirestore
+    ) {
         this._userCollection = _af.collection<User>('items', x => x.orderBy('name', 'asc'));
+
+        this.itemsCollection = _af.collection<Item>('items');
+        this.items = this.itemsCollection.valueChanges();
     }
 
     getUsers() {
@@ -51,5 +61,15 @@ export class UserService {
             console.error('Erro ao remover o documento: ', error);
         });
     }
+
+    addItem(item: Item) {
+        // this.firebase.getToken()
+        //     .then(token => console.log(`The token is ${token}`))
+        //     .catch(error => console.error('Error getting token', error));
+
+        this.itemsCollection.add({ name: 'item' });
+    }
+
+
 
 }

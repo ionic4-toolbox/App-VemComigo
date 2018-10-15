@@ -4,15 +4,9 @@ import { AuthGuardService } from './service/auth-guard.service';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
-  {
     path: 'home',
     canActivate: [AuthGuardService],
     loadChildren: './tabs/tabs.module#TabsPageModule'
-
   },
   {
     path: 'register',
@@ -23,21 +17,26 @@ const routes: Routes = [
     loadChildren: './login/login.module#LoginPageModule'
   },
   {
-    path: '**',
-    loadChildren: './page-not-found/page-not-found.module#PageNotFoundPageModule'
-  },
-  {
     path: 'profile',
-    loadChildren: './profile/profile.module#ProfilePageModule' 
-  },
-  {
-    path: 'register',
-    loadChildren: './register/register.module#RegisterPageModule' 
+    loadChildren: './profile/profile.module#ProfilePageModule'
   },
   {
     path: 'Busca',
     loadChildren: './busca/busca.module#BuscaPageModule'
-  }
+  },
+  {
+    path: 'cadastro-usuario',
+    loadChildren: './cadastro-usuario/cadastro-usuario.module#CadastroUsuarioPageModule'
+  },
+  {
+    path: '',
+    redirectTo: 'cadastro-usuario',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    loadChildren: './page-not-found/page-not-found.module#PageNotFoundPageModule'
+  },
 
 ];
 

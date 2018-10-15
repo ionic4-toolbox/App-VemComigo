@@ -1,14 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title class="titulos-page">#Partiu achar uma amiga</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="logout()">
-        <ion-icon slot="start" name="exit"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content padding class="content">
   
   <ion-title class="titulos-page">#Partiu achar uma amiga</ion-title>
@@ -19,6 +8,10 @@
         <ion-icon name="search"></ion-icon>
         <span>Buscar</span>
     </div>
+  </div>
+
+  <div *ngFor="let item of destinos; let i = index" [attr.data-index]="i" style="color: red;">
+    <p> {{ item.destino }} </p>
   </div>
 
   <div class="btn-alterar-destino">
@@ -32,15 +25,4 @@
     <span>Preciso de ajuda</span>
   </div>
 
-  <!-- <ion-searchbar></ion-searchbar>a
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Resultados encontrados</ion-label>
-    </ion-list-header>
-    <ion-item>Item 1</ion-item>
-    <ion-item>Item 2</ion-item>
-    <ion-item>Item 3</ion-item>
-    <ion-item>Item 4</ion-item>
-    <ion-item>Item 5</ion-item>
-  </ion-list> -->
 </ion-content>
