@@ -45,7 +45,7 @@ export class PerfilPage {
       return;
     } else {
       console.log('Cadastrar perfil: ', this.perfilForm.value);
-      this.userService.createUsers(this.perfilForm.value); 
+      this.userService.addUsers(this.perfilForm.value); 
     }
 
   }  

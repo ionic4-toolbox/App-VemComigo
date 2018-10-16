@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from 'firebase';
+import { config } from '../app.config';
 
 @Injectable()
 
@@ -10,15 +11,17 @@ export class UserService {
 
     // colecction
     private _userCollection: AngularFirestoreCollection<User>;
+    private userDoc: AngularFirestoreDocument<User>;
 
     // Observables
     users: Observable<User[]>;
     countItems: number;
 
     constructor(private _af: AngularFirestore) {
-        this._userCollection = _af.collection<User>('items', x => x.orderBy('name', 'asc'));
+        this._userCollection = _af.collection<User>(config.collection_endpoint_user, x => x.orderBy('name', 'asc'));
     }
 
+    // Busca os dados dos usuários
     getUsers() {
         this.users = this._userCollection.snapshotChanges().pipe(
             map(actions => {
@@ -33,23 +36,21 @@ export class UserService {
         return this.users;
     }
 
-    createUsers(user: any): any {
-        console.log('dados: ', user);
-
-        return this._userCollection.add(user).then(data => {
-            console.log('Documento cadastrado com sucesso!');
-        }).catch(error => {
-            console.error('Erro ao cadastrar o usuário: ', error);
-        });
-
+    // Adiciona um novo usuario
+    addUsers(user: User) {
+        return this._userCollection.add(user);
     }
 
-    deleteUsers(key) {
-        return this._userCollection.doc(key).delete().then(data => {
-            console.log('Documento deletado com sucesso!');
-        }).catch(error => {
-            console.error('Erro ao remover o documento: ', error);
-        });
+    // Atualiza os dados do usuário
+    updateUser(id, update) {
+        this.userDoc = this._af.doc<User>(`${config.collection_endpoint_user}/${id}`);
+        this.userDoc.update(update);
+    }
+
+    // Remove um usuário da base de dados
+    deleteUsers(id) {
+        this.userDoc = this._af.doc<User>(`${config.collection_endpoint_user}/${id}`);
+        this.userDoc.delete();
     }
 
 }

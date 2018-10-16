@@ -27,11 +27,11 @@
               <div class="msgInvalid" *ngIf="f.password.errors.required">Senha é obrigatória</div>
               <div class="msgInvalid" *ngIf="f.password.errors.minlength">A senha deve ter pelo menos 6 caracteres.</div>
             </ion-item>
-            <!-- 
+            
               <ion-item>
-                <ion-input placeholder="Confirme a senha" formControlName="password1"></ion-input>
+                <ion-input type="password" placeholder="Confirme a senha" formControlName="passwordConfirmation"></ion-input>
               </ion-item> 
-            -->
+           
           </ion-list>
         </ion-col>
       </ion-row>

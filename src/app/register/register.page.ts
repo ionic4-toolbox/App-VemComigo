@@ -23,7 +23,8 @@ export class RegisterPage {
   ) {
     this.registerForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+      passwordConfirmation: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
   }
 
@@ -57,8 +58,8 @@ export class RegisterPage {
       this.authenticationService.signUp(credentials).then(
         () => {
           console.log('cadastrado', data);
-          this.presentAlert('Usuário cadastrado com sucesso!');
-          this.router.navigateByUrl('/');
+          // this.presentAlert('Usuário cadastrado com sucesso!');
+          this.router.navigateByUrl('cadastro-usuario');
         },
         error => {
           this.signupError = error.message;

@@ -6,7 +6,7 @@
 
   <ion-title text-center margin>Bem-Vinda!</ion-title>
 
-  <div class="">
+  <div>
     <form [formGroup]="loginForm" (ngSubmit)="onLogin()" novalidate>
       <ion-grid>
         <ion-row>
@@ -46,20 +46,10 @@
     <ion-row>
       <ion-col size="12">
         <ion-list>
-          <!-- <ion-item (click)="loginGoogle()" class="cursor-pointer">
-            <ion-icon name="logo-facebook"></ion-icon>
-            Cadastrar com Facebook
-          </ion-item> -->
           <ion-item (click)="loginFacebook()">
             <ion-img src="assets/img/icon-fb.png" style="width: 30px;"></ion-img>
-            <ion-label>Cadastrar com Facebook</ion-label>
+            <ion-label>Login com Facebook</ion-label>
           </ion-item>
-<!-- 
-          <ion-button expand="full" (click)="loginFacebook()">
-              <ion-img src="assets/img/icon-fb.png" style="width: 30px;"></ion-img>
-              login com facebook
-          </ion-button> -->
-
         </ion-list>
       </ion-col>
     </ion-row>

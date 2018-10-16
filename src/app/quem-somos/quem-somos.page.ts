@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: 'quem-somos.page.html',
   styleUrls: ['quem-somos.page.scss']
 })
-export class QuemSomosPage {}
+export class QuemSomosPage {
+
+  logout() {
+    console.log('Fazer logout');
+  }
+
+}
