@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0",
-    "lab": "ionic serve --lab --host 0.0.0.0 --open",
+    "lab": "ionic serve --lab --host 0.0.0.0",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
