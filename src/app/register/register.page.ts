@@ -3,28 +3,35 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { AuthenticationService } from '../service/authentication.service';
+import { User } from '../models/user.model';
+import { Credenciais } from '../models/credenciais.model';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  styleUrls: ['./register.page.scss']
 })
 export class RegisterPage {
-
-  signupError: string;
-  registerForm: FormGroup;
+  user: User;
+  signupError = '';
   submitted = false;
+  credenciais: Credenciais;
+  registerForm: FormGroup;
+
 
   constructor(
     fb: FormBuilder,
-    private authenticationService: AuthenticationService,
+    private router: Router,
     private alertController: AlertController,
-    private router: Router
+    private userService: UserService,
+    private authenticationService: AuthenticationService
   ) {
     this.registerForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      passwordConfirmation: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+      passwordConfirmation: ['', Validators.compose([Validators.required, Validators.minLength(6)])
+      ]
     });
   }
 
@@ -39,37 +46,54 @@ export class RegisterPage {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.registerForm.controls; }
+  get f() {
+    return this.registerForm.controls;
+  }
 
   onSubmit() {
-
     this.submitted = true;
 
-    // Se o form é invalido pula fora
     if (this.registerForm.invalid) {
       return;
     } else {
       const data = this.registerForm.value;
-      const credentials = {
-        email: data.email,
-        password: data.password
-      };
-      console.log(credentials);
-      this.authenticationService.signUp(credentials).then(
+      this.credenciais = { email: data.email, password: data.password };
+
+      this.authenticationService.signUp(this.credenciais).then(
         () => {
-          console.log('cadastrado', data);
-          // this.presentAlert('Usuário cadastrado com sucesso!');
-          this.router.navigateByUrl('cadastro-usuario');
+          if ( data ) {
+            this.cadastrarEmailUsuario(data.email);
+            this.router.navigateByUrl('cadastro-usuario');
+          }
         },
         error => {
           this.signupError = error.message;
-          console.log('Erros encontrados: ', this.signupError);
           this.presentAlert('O endereço de e-mail já está sendo usado por outra conta.');
           this.registerForm.reset();
         }
       );
-    }
 
+    }
+  }
+
+  cadastrarEmailUsuario(pEmail: string): void {
+
+    this.user = {
+      id: '',
+      nome: '',
+      sobrenome: '',
+      turma: '',
+      horario: '',
+      email: pEmail,
+      telefone: 99999999
+    };
+
+    this.userService.addUsers(this.user).then(
+      data => {
+        console.log('Resultado da inserção: ', data);
+      },
+      error => console.log('Erros encontrados: ', error)
+      );
   }
 
 }
