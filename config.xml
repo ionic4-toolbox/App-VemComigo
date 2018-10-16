@@ -89,4 +89,5 @@
     </plugin>
     <engine name="android" spec="~7.0.0" />
     <plugin name="cordova-plugin-firebase" spec="^2.0.5" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.1" />
 </widget>
