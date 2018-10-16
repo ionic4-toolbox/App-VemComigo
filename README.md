@@ -1,5 +1,8 @@
 # VemComigo
 
+## Versão do ionic que estamos usando
+4.0.0-beta.7
+
 ## Visão geral
 Aplicativo para integração de mulheres.
 
