@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -12,10 +12,15 @@
       Perfil
     </ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content padding>
-  <form [formGroup]="perfilForm" (ngSubmit)="onCreate()" novalidate>
+
+  <div class="cabecalho">
+    <ion-img src="./assets/img/logo_login.png"></ion-img>
+  </div>
+
+  <form [formGroup]="perfilForm" (ngSubmit)="onUpdate()" novalidate>
     <ion-list>
       <ion-item>
         <ion-label position="floating">Nome*</ion-label>
@@ -35,7 +40,7 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">E-mail*</ion-label>
-        <ion-input type="text" value="maira@gmail.com" formControlName="email"></ion-input>
+        <ion-input type="text" formControlName="email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Telefone*</ion-label>
@@ -46,5 +51,9 @@
       <ion-button button shape="round" expand="block" type="submit">Salvar</ion-button>
     </div>
   </form>
+  <div padding>
+    <ion-button button shape="round" expand="full" (click)="logout()">Sair</ion-button>
+  </div>
+
 
 </ion-content>
