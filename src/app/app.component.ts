@@ -24,7 +24,7 @@ export class AppComponent {
       icon: 'list'
     }
   ];
-  
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

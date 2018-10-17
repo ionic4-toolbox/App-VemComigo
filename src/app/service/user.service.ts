@@ -45,11 +45,12 @@ export class UserService {
       map(actions => {
         this.countItems = actions.length;
         return actions.map(action => ({
-          id: action.payload.doc.id,
+          $key: action.payload.doc.id,
           ...action.payload.doc.data()
         }));
       })
     );
+    console.log('Resultados dos serviços: ', this.users);
     return this.users;
 
   }
@@ -73,7 +74,7 @@ export class UserService {
     this.userDoc = this._af.doc<User>(
       `${config.collection_endpoint_user}/${id}`
     );
-    this.userDoc.delete();
+    return this.userDoc.delete();
   }
 
 }
