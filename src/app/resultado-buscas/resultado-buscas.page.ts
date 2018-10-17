@@ -3,12 +3,11 @@ import { DestinoService } from '../service/destinos.service';
 import { Destino } from './../models/destino.model';
 
 @Component({
-  selector: 'app-busca',
-  templateUrl: './busca.page.html',
-  styleUrls: ['./busca.page.scss'],
+  selector: 'app-resultado-buscas',
+  templateUrl: './resultado-buscas.page.html',
+  styleUrls: ['./resultado-buscas.page.scss'],
 })
-export class BuscaPage implements OnInit {
-  btnBuscar = true;
+export class ResultadoBuscasPage implements OnInit {
   destinos: Destino[];
 
   constructor(private destinoService: DestinoService) { }
@@ -20,7 +19,4 @@ export class BuscaPage implements OnInit {
     });
   }
 
-  exibirBusca(param: boolean) {
-    this.btnBuscar = false;
-  }
 }

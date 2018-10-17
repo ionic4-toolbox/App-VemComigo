@@ -29,6 +29,10 @@ const routes: Routes = [
     loadChildren: './cadastro-usuario/cadastro-usuario.module#CadastroUsuarioPageModule'
   },
   {
+    path: 'resultado-buscas',
+    loadChildren: './resultado-buscas/resultado-buscas.module#ResultadoBuscasPageModule' 
+  },
+  {
     path: '',
     redirectTo: 'cadastro-usuario',
     pathMatch: 'full'
