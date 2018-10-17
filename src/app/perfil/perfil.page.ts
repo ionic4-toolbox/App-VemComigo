@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 import { User } from '../models/user.model';
 
 import { UserService } from '../service/user.service';
 import { AuthenticationService } from '../service/authentication.service';
+
 
 @Component({
   selector: 'app-perfil',
@@ -21,7 +23,8 @@ export class PerfilPage implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private alertController: AlertController
   ) {
     this.perfilForm = fb.group({
       id: [''],
@@ -34,20 +37,42 @@ export class PerfilPage implements OnInit {
     });
   }
 
+  async presentAlert(title: string, msg: string, btn: Array<string> = ['OK', 'CANCELAR']) {
+    const alert = await this.alertController.create({
+      header: title,
+      message: msg,
+      buttons: btn
+    });
+
+    await alert.present();
+  }
+
   ngOnInit(): void {
+
     this.authenticationService.getProfile().subscribe(data => {
+      console.log('Email: ', data.email);
       if (data) {
         this.userService.getUsersId(data.email).subscribe(users => {
-          const user = users[0];
-          this.perfilForm.controls['id'].setValue(user.id);
-          this.perfilForm.controls['nome'].setValue(user.nome);
-          this.perfilForm.controls['sobrenome'].setValue(user.sobrenome);
-          this.perfilForm.controls['turma'].setValue(user.turma);
-          this.perfilForm.controls['horario'].setValue(user.horario);
-          this.perfilForm.controls['email'].setValue(user.email);
-          this.perfilForm.controls['telefone'].setValue(user.telefone);
+          this.user = users[0];
+          if (users[0]) {
+            if (this.user['$key']) {
+              this.perfilForm.reset();
+              this.perfilForm.controls['id'].setValue(this.user['$key']);
+              this.perfilForm.controls['nome'].setValue(this.user['nome']);
+              this.perfilForm.controls['sobrenome'].setValue(this.user['sobrenome']);
+              this.perfilForm.controls['turma'].setValue(this.user['turma']);
+              this.perfilForm.controls['horario'].setValue(this.user['horario']);
+              this.perfilForm.controls['email'].setValue(this.user['email']);
+              this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
+              console.log(this.perfilForm.value);
+            }
+          } else {
+            this.router.navigate(['login']);
+          }
+
         });
       }
+
     });
   }
 
@@ -60,16 +85,27 @@ export class PerfilPage implements OnInit {
 
       this.userService.updateUser(this.perfilForm.value.id, this.perfilForm.value).then(
         data => {
-          console.log('Resultado: ', data);
+          this.presentAlert('Perfil', 'Perfil atualizado com sucesso!', ['OK']);
         },
-        error => console.log('Error: ', error)
+        error => {
+          this.presentAlert('Perfil', 'Perfil não foi atualizado! ' + error, ['OK']);
+        }
       );
 
     }
   }
 
+  deletarperfil() {
+    this.userService.deleteUsers(this.user.id).then(
+      () => {
+        this.presentAlert('Deletar Perfil', 'Você gostaria de deletar seu perfil');
+        this.router.navigate(['login']);
+      },
+      error => console.log('Error: ', error)
+    );
+  }
+
   logout() {
-    console.log('Logout()');
     this.authenticationService.logout();
     this.router.navigate(['login']);
   }

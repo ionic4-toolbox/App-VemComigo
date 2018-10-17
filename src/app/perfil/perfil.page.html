@@ -14,46 +14,61 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content padding>
+<!-- <ion-content padding> -->
 
-  <div class="cabecalho">
+<!-- <div class="cabecalho">
     <ion-img src="./assets/img/logo_login.png"></ion-img>
-  </div>
+  </div> -->
+<ion-content padding class="content">
 
-  <form [formGroup]="perfilForm" (ngSubmit)="onUpdate()" novalidate>
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating">Nome*</ion-label>
-        <ion-input type="text" value="Maira" formControlName="nome"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">SobreNome*</ion-label>
-        <ion-input type="text" value="Mendonça" formControlName="sobrenome"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Turma*</ion-label>
-        <ion-input type="text" value="1B" formControlName="turma"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Horário de saída*</ion-label>
-        <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" formControlName="horario"></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">E-mail*</ion-label>
-        <ion-input type="text" formControlName="email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Telefone*</ion-label>
-        <ion-input type="text" value="(61) 9999 - 9999" formControlName="telefone"></ion-input>
-      </ion-item>
-    </ion-list>
-    <div padding>
-      <ion-button button shape="round" expand="block" type="submit">Salvar</ion-button>
-    </div>
-  </form>
-  <div padding>
-    <ion-button button shape="round" expand="full" (click)="logout()">Sair</ion-button>
-  </div>
+  <ion-title class="titulos-page">#Perfil</ion-title>
+  <div padding-top>
+    <form [formGroup]="perfilForm" (ngSubmit)="onUpdate()" novalidate>
 
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Nome*</ion-label>
+          <ion-input type="text" value="Maira" formControlName="nome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">SobreNome*</ion-label>
+          <ion-input type="text" value="Mendonça" formControlName="sobrenome"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Turma*</ion-label>
+          <ion-input type="text" value="1B" formControlName="turma"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Horário de saída*</ion-label>
+          <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" formControlName="horario"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">E-mail*</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Telefone*</ion-label>
+          <ion-input type="text" value="(61) 9999 - 9999" formControlName="telefone"></ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button button shape="round" expand="full" size="small" type="submit">Atualizar</ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button button shape="round" expand="full" size="small" (click)="deletarperfil()" type="button">Deletar</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button button shape="round" expand="full" size="small" (click)="logout()" type="button">Sair</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </form>
+  </div>
 
 </ion-content>
