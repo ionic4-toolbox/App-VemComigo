@@ -1,28 +1,46 @@
 <ion-content padding class="content">
-  
   <ion-title class="titulos-page">#Partiu achar uma amiga</ion-title>
 
-  <div class="imgBuscar">
-    <img src="assets/img/avatar-finn.png" alt="">
-    <div class="imgSearch">
-        <ion-icon name="search"></ion-icon>
-        <span>Buscar</span>
+  <!-- Div inicial com botão de buscar -->
+  <div *ngIf="btnBuscar" (click)="exibirBusca(false)">
+    <div class="imgBuscar" routerLink="/home/tabs/(resultado:resultado)">
+      <img src="assets/img/buscar1.png" alt="logo buscar destinos">
+    </div>
+    <div class="btn-alterar-destino">
+      <ion-button fill="outline" expand="block" shape="round">
+        Alterar destino
+      </ion-button>
+    </div>
+    <div class="ajuda-usuario">
+      <ion-icon name="help-circle-outline"></ion-icon>
+      <span>Preciso de ajuda</span>
     </div>
   </div>
 
-  <div *ngFor="let item of destinos; let i = index" [attr.data-index]="i" style="color: red;">
-    <p> {{ item.destino }} </p>
-  </div>
+  <!-- Div com resultado de buscas -->
+  <div *ngIf="!btnBuscar">
+    <!-- <div *ngFor="let item of destinos; let i = index" [attr.data-index]="i" style="color: red;">
+      <p> {{ item.destino }} </p>
+    </div> -->
 
-  <div class="btn-alterar-destino">
-    <ion-button fill="outline" expand="block" shape="round">
-      Alterar destino
-    </ion-button>
-  </div>
+    <ion-list *ngFor="let item of destinos; let i = index" [attr.data-index]="i" style="color: red;">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="assets/img/avatar-finn.png">
+          <ion-label style="font-size: 15px;">Isabella Silva</ion-label>
+        </ion-avatar>
+        <ion-label>
+          <h3>A-B DESTINO</h3>
+          <p>TIJUCA</p>
+          <h3>A-B DESTINO</h3>
+          <p>TIJUCA</p>
+          <div class="imgWhatsZapBusca">
+              <img src="assets/img/icon-whatsapp.png">
+          </div>
+        </ion-label>
+      </ion-item>
+    </ion-list>
 
-  <div class="ajuda-usuario">
-    <ion-icon name="help-circle-outline"></ion-icon>
-    <span>Preciso de ajuda</span>
   </div>
 
 </ion-content>

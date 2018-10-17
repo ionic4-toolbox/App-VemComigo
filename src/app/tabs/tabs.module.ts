@@ -10,6 +10,7 @@ import { QuemSomosPageModule } from '../quem-somos/quem-somos.module';
 import { AjudaPageModule } from '../ajuda/ajuda.module';
 import { PerfilPageModule } from '../perfil/perfil.module';
 import { BuscaPageModule } from '../busca/busca.module';
+import { ResultadoBuscasPageModule } from '../resultado-buscas/resultado-buscas.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { BuscaPageModule } from '../busca/busca.module';
     AjudaPageModule,
     BuscaPageModule,
     QuemSomosPageModule,
-    PerfilPageModule
+    PerfilPageModule,
+    ResultadoBuscasPageModule
   ],
   declarations: [TabsPage]
 })

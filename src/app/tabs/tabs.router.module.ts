@@ -6,6 +6,7 @@ import { BuscaPage } from '../busca/busca.page';
 import { PerfilPage } from '../perfil/perfil.page';
 import { TabsPage } from './tabs.page';
 import { QuemSomosPage } from '../quem-somos/quem-somos.page';
+import { ResultadoBuscasPage } from '../resultado-buscas/resultado-buscas.page';
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
         path: 'busca',
         outlet: 'busca',
         component: BuscaPage
+      },
+      {
+        path: 'resultado',
+        outlet: 'resultado',
+        component: ResultadoBuscasPage
       },
       {
         path: 'ajuda',

@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>resultado-buscas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <div *ngFor="let item of destinos; let i = index" [attr.data-index]="i" style="color: red;">
+        <p> {{ item.destino }} </p>
+      </div>
+</ion-content>
