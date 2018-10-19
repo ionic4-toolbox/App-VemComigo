@@ -32,7 +32,7 @@ Apos habilitar a depuração usb é hora de conectar o cabo usb no celular e plu
 **O comando baixo gera a plataforma android para o aplicativo no projeto ionic (executar apenas uma vez):**
 
 ```sh
-ionic platform add android
+ionic cordova platform add android
 ```
 **O comando abaixo gera um release que pode ser executada diretamente no celular**
 
