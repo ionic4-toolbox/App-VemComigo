@@ -1,19 +1,28 @@
-<ion-content padding class="content">
-  <ion-title class="titulos-page">#Partiu achar uma amiga</ion-title>
+<ion-content padding>
+
+  <p text-center>
+    <ion-text color="danger">#Partiu achar uma amiga</ion-text>
+  </p>
 
   <!-- Div inicial com botão de buscar -->
-  <div *ngIf="btnBuscar" (click)="exibirBusca(false)">
-    <div class="imgBuscar" routerLink="/home/tabs/(resultado:resultado)">
-      <img src="assets/img/buscar1.png" alt="logo buscar destinos">
+  <div *ngIf="btnBuscar" (click)="exibirBusca(false)" text-center>
+    <div style="padding-top: 20vh;">
+      <a routerLink="/home/tabs/(resultado:resultado)">
+        <img src="assets/img/buscar1.png" alt="logo buscar destinos">
+      </a>
     </div>
-    <div class="btn-alterar-destino">
-      <ion-button fill="outline" expand="block" shape="round">
+
+    <div style="padding-top: 20vh;">
+      <ion-button expand="block" fill="outline" shape="round">
         Alterar destino
       </ion-button>
-    </div>
-    <div class="ajuda-usuario">
-      <ion-icon name="help-circle-outline"></ion-icon>
-      <span>Preciso de ajuda</span>
+
+      <ion-button expand="block" fill="clear" shape="round" margin-top>
+        <ion-icon slot="start" name="help-circle-outline"></ion-icon>
+        <ion-text text-lowercase>
+          Preciso de ajuda
+        </ion-text>
+      </ion-button>
     </div>
   </div>
 
@@ -23,23 +32,38 @@
       <p> {{ item.destino }} </p>
     </div> -->
 
-    <ion-list *ngFor="let item of destinos; let i = index" [attr.data-index]="i" style="color: red;">
+    <ion-card *ngFor="let item of destinos; let i = index" [attr.data-index]="i" margin-top>
       <ion-item>
         <ion-avatar slot="start">
           <img src="assets/img/avatar-finn.png">
-          <ion-label style="font-size: 15px;">Isabella Silva</ion-label>
         </ion-avatar>
-        <ion-label>
-          <h3>A-B DESTINO</h3>
-          <p>TIJUCA</p>
-          <h3>A-B DESTINO</h3>
-          <p>TIJUCA</p>
-          <div class="imgWhatsZapBusca">
-              <img src="assets/img/icon-whatsapp.png">
-          </div>
-        </ion-label>
+        <ion-label>Isabella Silva</ion-label>
+        <ion-icon color="success" name="logo-whatsapp" slot="end"></ion-icon>
       </ion-item>
-    </ion-list>
+      <ion-card-content>
+        <ion-item>
+          <p>
+            <ion-text color="danger">A-B</ion-text>&nbsp;<ion-text color="medium">DESTINO</ion-text>
+            <br>
+            TIJUCA
+          </p>
+        </ion-item>
+        <ion-item margin-top>
+          <p>
+            <ion-text color="danger">A-B</ion-text>&nbsp;<ion-text color="medium">MEIO DE TRANSPORTE</ion-text>
+            <br>
+            Carro
+          </p>
+        </ion-item>
+        <ion-item margin-top>
+          <p>
+            <ion-text color="danger">A-B</ion-text>&nbsp;<ion-text color="medium">PONTO DE ENCONTRO</ion-text>
+            <br>
+            Ponto de ônibus
+          </p>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
 
   </div>
 

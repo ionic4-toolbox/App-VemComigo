@@ -1,0 +1,16 @@
+.cabecalho {
+  background: var(--ion-color-primary);
+  border-bottom-left-radius: 50% 20%;
+  border-bottom-right-radius: 50% 20%;
+}
+
+.input {
+  background: #ffffff;
+  border-radius: 64px;
+  box-shadow: 0 0 10px rgba(0,0,0,.25);
+  padding: 0 9px;
+}
+
+.buttons {
+  padding: 32px 0 0;
+}
