@@ -35,7 +35,6 @@ export class UserService {
         }));
       })
     );
-    console.log('Dados: ', this.users);
     return this.users;
   }
 
@@ -50,7 +49,6 @@ export class UserService {
         }));
       })
     );
-    console.log('Resultados dos serviços: ', this.users);
     return this.users;
 
   }
@@ -62,7 +60,6 @@ export class UserService {
 
   // Atualiza os dados do usuário
   updateUser(id, update) {
-    console.log(id, update);
     this.userDoc = this._af.doc<User>(
       `${config.collection_endpoint_user}/${id}`
     );

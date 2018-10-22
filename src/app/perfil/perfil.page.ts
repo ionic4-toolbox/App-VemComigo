@@ -47,6 +47,31 @@ export class PerfilPage implements OnInit {
     await alert.present();
   }
 
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      header: 'Deletar perfil',
+      message: 'Você gostaria de deletar seu perfil?',
+      buttons: [
+        {
+          text: 'NÃO',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'SIM',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deletarperfil(true);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   ngOnInit(): void {
 
     this.authenticationService.getProfile().subscribe(data => {
@@ -95,14 +120,19 @@ export class PerfilPage implements OnInit {
     }
   }
 
-  deletarperfil() {
-    this.userService.deleteUsers(this.user.id).then(
-      () => {
-        this.presentAlert('Deletar Perfil', 'Você gostaria de deletar seu perfil');
-        this.router.navigate(['login']);
-      },
-      error => console.log('Error: ', error)
-    );
+  deletarperfil(mostrarMsg: boolean) {
+    
+    if (!mostrarMsg) {
+      this.presentAlertConfirm();
+    } else {
+      this.userService.deleteUsers(this.user['$key']).then(
+        () => {
+          this.router.navigate(['login']);
+        },
+        error => console.log('Error: ', error)
+      );
+    }
+
   }
 
   logout() {

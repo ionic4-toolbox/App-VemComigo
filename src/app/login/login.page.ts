@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { AuthenticationService } from '../service/authentication.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private authService: AuthenticationService,
     public alertController: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    public loadingController: LoadingController
   ) {
 
     this.loginForm = fb.group({
@@ -32,16 +34,25 @@ export class LoginPage implements OnInit {
   ngOnInit() { }
 
 
-  async presentAlert() {
+  async presentAlert(msg: string) {
     const alert = await this.alertController.create({
       header: 'Atenção',
       // subHeader: 'Subtitle',
-      message: 'This is an alert message.',
+      message: msg,
       buttons: ['OK']
     });
 
     await alert.present();
   }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Aguarde ...',
+      duration: 2000
+    });
+    return await loading.present();
+  }
+
 
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
@@ -57,7 +68,7 @@ export class LoginPage implements OnInit {
     if (this.loginForm.invalid) {
       return;
     } else {
-
+      this.presentLoading();
       this.authService.signWithEmail(this.credentias).then(
         () => {
           console.log('Logado');
@@ -66,11 +77,14 @@ export class LoginPage implements OnInit {
           console.log('Erros encontrados: ', error.code);
 
           if (error.code === 'auth/wrong-password') {
-            console.log(error.message);
+            // console.log(error.message);
+            this.presentAlert('Usuário ou senha invalido.');
           } else if ( error.code === 'auth/user-not-found' ) {
-            console.log(error.message);
+            // console.log(error.message);
+            this.presentAlert('Não há registro de usuário correspondente a este identificador.');
           } else {
-            console.log(error.message);
+            // console.log(error.message);
+            this.presentAlert('Erro encontrado: ' + error.message);
           }
         }
       );
