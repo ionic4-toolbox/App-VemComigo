@@ -29,8 +29,8 @@ export class PerfilPage implements OnInit {
     this.perfilForm = fb.group({
       id: [''],
       nome: [''],
-      sobrenome: [''],
-      turma: [''],
+      // sobrenome: [''],
+      Destino: [''],
       horario: [''],
       email: [''],
       telefone: ['']
@@ -59,8 +59,8 @@ export class PerfilPage implements OnInit {
               this.perfilForm.reset();
               this.perfilForm.controls['id'].setValue(this.user['$key']);
               this.perfilForm.controls['nome'].setValue(this.user['nome']);
-              this.perfilForm.controls['sobrenome'].setValue(this.user['sobrenome']);
-              this.perfilForm.controls['turma'].setValue(this.user['turma']);
+              // this.perfilForm.controls['sobrenome'].setValue(this.user['sobrenome']);
+              this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
               this.perfilForm.controls['horario'].setValue(this.user['horario']);
               this.perfilForm.controls['email'].setValue(this.user['email']);
               this.perfilForm.controls['telefone'].setValue(this.user['telefone']);

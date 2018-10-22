@@ -1,44 +1,46 @@
-<ion-content padding>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>#Partiu achar uma amiga</ion-title>
+  </ion-toolbar>
+  <ion-buttons slot="start">
+    <ion-back-button></ion-back-button>
+  </ion-buttons>
+</ion-header>
 
-  <p text-center>
-    <ion-text color="danger">#Partiu achar uma amiga</ion-text>
-  </p>
+<ion-content padding class="content">
 
   <!-- Div inicial com botão de buscar -->
-  <div *ngIf="btnBuscar" (click)="exibirBusca(false)" text-center>
-    <div style="padding-top: 20vh;">
-      <a routerLink="/home/tabs/(resultado:resultado)">
-        <img src="assets/img/buscar1.png" alt="logo buscar destinos">
-      </a>
+  <div *ngIf="btnBuscar">
+    <div class="imgBuscar" (click)="exibirBusca(false)">
+      <img src="assets/img/buscar1.png" alt="logo buscar destinos">
     </div>
-
-    <div style="padding-top: 20vh;">
-      <ion-button expand="block" fill="outline" shape="round">
+    <div class="btn-alterar-destino">
+      <ion-button fill="outline" expand="block" shape="round" (click)="editar()">
         Alterar destino
       </ion-button>
-
-      <ion-button expand="block" fill="clear" shape="round" margin-top>
-        <ion-icon slot="start" name="help-circle-outline"></ion-icon>
-        <ion-text text-lowercase>
-          Preciso de ajuda
-        </ion-text>
-      </ion-button>
+    </div>
+    <div class="ajuda-usuario" (click)="ajuda()">
+      <ion-icon name="help-circle-outline"></ion-icon>
+      <span>Preciso de ajuda</span>
     </div>
   </div>
 
   <!-- Div com resultado de buscas -->
   <div *ngIf="!btnBuscar">
-    <!-- <div *ngFor="let item of destinos; let i = index" [attr.data-index]="i" style="color: red;">
-      <p> {{ item.destino }} </p>
-    </div> -->
-
-    <ion-card *ngFor="let item of destinos; let i = index" [attr.data-index]="i" margin-top>
+    <ion-list *ngFor="let item of destinos; let i = index" [attr.data-index]="i" style="color: red;">
       <ion-item>
         <ion-avatar slot="start">
           <img src="assets/img/avatar-finn.png">
         </ion-avatar>
-        <ion-label>Isabella Silva</ion-label>
-        <ion-icon color="success" name="logo-whatsapp" slot="end"></ion-icon>
+        <ion-label>
+          <h3>A-B DESTINO</h3>
+          <p>TIJUCA</p>
+          <h3>A-B DESTINO</h3>
+          <p>TIJUCA</p>
+          <div class="imgWhatsZapBusca">
+            <img src="assets/img/icon-whatsapp.png">
+          </div>
+        </ion-label>
       </ion-item>
       <ion-card-content>
         <ion-item>
