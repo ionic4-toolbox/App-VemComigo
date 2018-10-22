@@ -1,17 +1,17 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Ajuda</ion-title>
+    <ion-title>#Ajuda</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding-top>
+<ion-content>
 
   <ion-list class="accordion-list">
     <ion-list margin class="list-border" *ngFor="let item of information; let i = index" no-lines no-padding>
-    
+
       <ion-item class="hover-click  border-radius" (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
         {{ item.name }}
-        <ion-icon class="float-right" name="ios-arrow-dropright"  *ngIf="!item.open"></ion-icon>
+        <ion-icon class="float-right" name="ios-arrow-dropright" *ngIf="!item.open"></ion-icon>
         <ion-icon class="float-right" name="ios-arrow-dropdown" *ngIf="item.open"></ion-icon>
       </ion-item>
 
@@ -20,8 +20,8 @@
           <ion-item>{{ child.information }}</ion-item>
         </ion-list-header>
       </ion-list>
-     
-      
+
+
     </ion-list>
   </ion-list>
 
