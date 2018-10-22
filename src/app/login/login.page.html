@@ -1,57 +1,45 @@
-<ion-content>
+<ion-content style="background: #f1f9fc;">
 
-  <div class="cabecalho">
-    <ion-img src="./assets/img/logo_login.png"></ion-img>
+  <div class="cabecalho" margin-bottom padding text-center>
+    <img src="./assets/img/logo-vemcomigo.png" alt="Vem Comigo">
   </div>
 
-  <ion-title text-center margin>Bem-Vinda!</ion-title>
+  <div padding-top>
+    <p margin padding text-center>
+      <ion-text color="danger">Bem-Vinda!</ion-text>
+    </p>
+    <div padding>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()" novalidate>
+        <div class="input">
+          <ion-input type="text" placeholder="Informe seu e-mail" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
+        </div>
+        <ion-item *ngIf="submitted && f.email.errors">
+          <ion-text color="danger" *ngIf="f.email.errors.required">Você esqueceu de informar o e-mail</ion-text>
+          <ion-text color="danger" *ngIf="f.email.errors.email">Exemplo: fulano@email.com</ion-text>
+        </ion-item>
 
-  <div>
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" novalidate>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-item margin-top>
-              <ion-input type="text" placeholder="Email" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="submitted && f.email.errors" class="ion-invalid">
-              <div class="msgInvalid" *ngIf="f.email.errors.required">E-mail é obrigatório</div>
-              <div class="msgInvalid" *ngIf="f.email.errors.email">E-mail deve ser um endereço válido</div>
-            </ion-item>
-            <ion-item margin-top>
-              <ion-input type="password" placeholder="Password" id="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="submitted && f.password.errors" class="ion-invalid">
-              <div class="msgInvalid" *ngIf="f.password.errors.required">Senha é obrigatória</div>
-              <div class="msgInvalid" *ngIf="f.password.errors.minlength">A senha deve ter pelo menos 6 caracteres.</div>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-button button expand="block" shape="round" type="submit">Entrar</ion-button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-button button expand="block" shape="round" color="primary" fill="outline" href="/register"
-              routerDirection="forward">Novo Usuário</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </form>
+        <div class="input" margin-top>
+          <ion-input type="password" placeholder="Sua senha" id="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"></ion-input>
+        </div>
+        <ion-item *ngIf="submitted && f.password.errors">
+          <ion-text color="danger" *ngIf="f.password.errors.required">Preencha sua senha</ion-text>
+          <ion-text color="danger" *ngIf="f.password.errors.minlength">A senha deve ter pelo menos 6 caracteres</ion-text>
+        </ion-item>
+
+        <div class="buttons">
+          <ion-button expand="block" shape="round" type="submit" margin-top>Entrar</ion-button>
+          <ion-button expand="block" fill="outline" shape="round" href="/register" routerDirection="forward" margin-top>Novo
+            Usuário</ion-button>
+        </div>
+        <ion-button color="tertiary" expand="block" fill="clear" shape="round" (click)="loginFacebook()" margin-top>
+          <ion-icon slot="start" name="logo-facebook"></ion-icon>
+          <!-- <img src="./assets/img/icon-fb.png" alt="Facebook"> -->
+          <ion-text text-lowercase>
+            Login com Facebook
+          </ion-text>
+        </ion-button>
+      </form>
+    </div>
   </div>
 
-  <ion-grid class="cadFacebook">
-    <ion-row>
-      <ion-col size="12">
-        <ion-list>
-          <ion-item (click)="loginFacebook()">
-            <ion-img src="assets/img/icon-fb.png" style="width: 30px;"></ion-img>
-            <ion-label>Login com Facebook</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 </ion-content>
