@@ -64,6 +64,18 @@ export class AuthenticationService {
     );
   }
 
+  signInWithFacebook() {
+    return this._firebaseAuth.auth.signInWithPopup(
+      new firebase.auth.FacebookAuthProvider()
+    ).then(
+      () => {
+        this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
+          this.authenticationState.next(true);
+        });
+      }
+    );
+  }
+
   logout() {
     return this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
