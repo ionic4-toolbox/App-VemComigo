@@ -7,6 +7,7 @@
 <ion-content padding class="content">
   <!-- <ion-title class="titulos-page">#Perfil</ion-title> -->
   <div padding-top>
+    <!-- {{ user | json }} -->
     <form [formGroup]="perfilForm" (ngSubmit)="onUpdate()" novalidate>
       <ion-list>
         <ion-item>
@@ -41,6 +42,7 @@
           </ion-col>
           <ion-col size="6">
             <ion-button button shape="round" expand="full" size="small" (click)="deletarperfil(false)" type="button">Deletar</ion-button>
+            <!-- <ion-button button shape="round" expand="full" size="small" (click)="tirarFoto()" type="button">Foto</ion-button> -->
           </ion-col>
         </ion-row>
         <ion-row>

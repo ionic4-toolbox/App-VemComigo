@@ -4,6 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
+import { Camera } from '@ionic-native/camera/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
+
 import { PerfilPage } from './perfil.page';
 import { UserService } from '../service/user.service';
 
@@ -20,7 +23,13 @@ import { UserService } from '../service/user.service';
       }
     ])
   ],
-  providers: [UserService],
-  declarations: [PerfilPage]
+  providers: [
+    UserService,
+    Camera,
+    Facebook
+  ],
+  declarations: [
+    PerfilPage
+  ]
 })
 export class PerfilPageModule {}

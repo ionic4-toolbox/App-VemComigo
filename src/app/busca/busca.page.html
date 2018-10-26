@@ -1,17 +1,20 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>#Partiu achar uma amiga</ion-title>
+    <ion-buttons slot="start" *ngIf="MostraBtnVoltar">
+      <!-- <ion-back-button (click)="onClick()"></ion-back-button> -->
+      <ion-button (click)="exibirBusca(true, false)">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
-  <ion-buttons slot="start">
-    <ion-back-button></ion-back-button>
-  </ion-buttons>
 </ion-header>
 
 <ion-content padding class="content">
 
   <!-- Div inicial com botão de buscar -->
   <div *ngIf="btnBuscar">
-    <div class="imgBuscar" (click)="exibirBusca(false)">
+    <div class="imgBuscar" (click)="exibirBusca(false, true)">
       <img src="assets/img/buscar1.png" alt="logo buscar destinos">
     </div>
     <div class="btn-alterar-destino">

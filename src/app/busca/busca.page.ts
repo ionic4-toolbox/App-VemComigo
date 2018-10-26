@@ -12,6 +12,7 @@ import { PerfilPage } from '../perfil/perfil.page';
 export class BuscaPage implements OnInit {
   btnBuscar = true;
   destinos: Destino[];
+  MostraBtnVoltar: boolean;
 
   constructor(
     private destinoService: DestinoService,
@@ -19,23 +20,23 @@ export class BuscaPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.MostraBtnVoltar = false;
     this.destinoService.getDestinos().subscribe(data => {
       this.destinos = data;
       console.log(data);
     });
   }
 
-  exibirBusca(param: boolean) {
-    this.btnBuscar = false;
+  exibirBusca(pMostraBusca: boolean, pMostraBtnVoltar: boolean) {
+    this.btnBuscar = pMostraBusca;
+    this.MostraBtnVoltar = pMostraBtnVoltar;
   }
 
   editar() {
-    console.log('Editar');
     this.navCtrl.navigateRoot('/home/tabs/(perfil:perfil)');
   }
 
   ajuda() {
-    console.log('Editar');
     this.navCtrl.navigateRoot('/home/tabs/(ajuda:ajuda)');
   }
 
