@@ -7,7 +7,10 @@ import { User } from '../models/user.model';
 
 import { UserService } from '../service/user.service';
 import { AuthenticationService } from '../service/authentication.service';
+import { Storage } from '@ionic/storage';
 
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 @Component({
   selector: 'app-perfil',
@@ -19,17 +22,20 @@ export class PerfilPage implements OnInit {
   submitted = false;
   user: User;
 
+
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private authenticationService: AuthenticationService,
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private camera: Camera,
+    private facebook: Facebook,
+    private storage: Storage,
   ) {
     this.perfilForm = fb.group({
       id: [''],
       nome: [''],
-      // sobrenome: [''],
       Destino: [''],
       horario: [''],
       email: [''],
@@ -73,31 +79,45 @@ export class PerfilPage implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
     this.authenticationService.getProfile().subscribe(data => {
-      console.log('Email: ', data.email);
+      alert(JSON.stringify(data));
       if (data) {
-        this.userService.getUsersId(data.email).subscribe(users => {
+        this.userService.getUsersId(data.email || data['email']).subscribe(users => {
           this.user = users[0];
           if (users[0]) {
             if (this.user['$key']) {
               this.perfilForm.reset();
               this.perfilForm.controls['id'].setValue(this.user['$key']);
               this.perfilForm.controls['nome'].setValue(this.user['nome']);
-              // this.perfilForm.controls['sobrenome'].setValue(this.user['sobrenome']);
               this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
               this.perfilForm.controls['horario'].setValue(this.user['horario']);
               this.perfilForm.controls['email'].setValue(this.user['email']);
               this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
-              console.log(this.perfilForm.value);
             }
           } else {
             this.router.navigate(['login']);
           }
-
         });
       }
+    });
+    
+  }
 
+  tirarFoto() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    
+    this.camera.getPicture(options).then((imageData) => {
+     // imageData is either a base64 encoded string or a file URI
+     // If it's base64 (DATA_URL):
+     let base64Image = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+     // Handle error
     });
   }
 
@@ -121,7 +141,7 @@ export class PerfilPage implements OnInit {
   }
 
   deletarperfil(mostrarMsg: boolean) {
-    
+
     if (!mostrarMsg) {
       this.presentAlertConfirm();
     } else {

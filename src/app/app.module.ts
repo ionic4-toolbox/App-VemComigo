@@ -17,6 +17,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { AuthGuardService } from './service/auth-guard.service';
+import { Facebook } from '@ionic-native/facebook/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,8 +38,12 @@ import { AuthGuardService } from './service/auth-guard.service';
     AngularFirestore,
     AngularFireDatabase,
     AuthGuardService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Facebook,
+    Camera
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

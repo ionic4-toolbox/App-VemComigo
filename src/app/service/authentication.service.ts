@@ -3,9 +3,8 @@ import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs';
-import { LoadingController } from '@ionic/angular';
+import * as firebase from 'firebase/app';
 
 const TOKEN_KEY = 'auth-token';
 
@@ -20,14 +19,12 @@ export class AuthenticationService {
   constructor(
     private storage: Storage,
     private plt: Platform,
-    private _firebaseAuth: AngularFireAuth,
-    private _loadingCtrl: LoadingController
+    private _firebaseAuth: AngularFireAuth
   ) {
     this.user = _firebaseAuth.authState;
     this.plt.ready().then(() => {
       this.checkToken();
     });
-
   }
 
   checkToken() {
@@ -39,7 +36,7 @@ export class AuthenticationService {
   }
 
   signUp(credentials) {
-    return this._firebaseAuth.auth.createUserWithEmailAndPassword(credentials.email,credentials.password);
+    return this._firebaseAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password);
   }
 
   signWithEmail(credentials) {
@@ -64,16 +61,21 @@ export class AuthenticationService {
     );
   }
 
-  signInWithFacebook() {
-    return this._firebaseAuth.auth.signInWithPopup(
-      new firebase.auth.FacebookAuthProvider()
-    ).then(
-      () => {
+  signInWithFacebook(data?: any): void {
+
+    // return this._firebaseAuth.auth.signInWithPopup(
+    //   new firebase.auth.FacebookAuthProvider()
+    // ).then(
+      // () => {
+        this.storage.set('userCurrent', JSON.stringify(data.user)).then(() => {
+          this.authenticationState.next(true);
+        });
         this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
           this.authenticationState.next(true);
         });
-      }
-    );
+      // }
+
+    // );
   }
 
   logout() {
