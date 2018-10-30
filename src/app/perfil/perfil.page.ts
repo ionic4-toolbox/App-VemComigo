@@ -79,74 +79,59 @@ export class PerfilPage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.storage.get('userCurrent').then(
+    (data: any) => {
 
-    let dadosUser = this.storage.get('userCurrent').then(
-      (data: any) => {
-        
-        if (data) {
-          console.log('Valor do usuario logado' + data);
- 
-          // this.userService.getUsersId(data.email || data['email']).subscribe(users => {
-          //   this.user = users[0];
-          //   if (users[0]) {
-          //     if (this.user['$key']) {
-          //       this.perfilForm.reset();
-          //       this.perfilForm.controls['id'].setValue(this.user['$key']);
-          //       this.perfilForm.controls['nome'].setValue(this.user['nome']);
-          //       this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
-          //       this.perfilForm.controls['horario'].setValue(this.user['horario']);
-          //       this.perfilForm.controls['email'].setValue(this.user['email']);
-          //       this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
-          //     }
-          //   } else {
-          //     this.router.navigate(['login']);
-          //   }
-          // });
-        }
+        const usuario = JSON.parse(data);
 
-      }
-    )
-    alert()
+        console.log('Dados storage: ', usuario.user);
 
-    // this.authenticationService.getProfile().subscribe(data => {
-    //   // alert(JSON.stringify(data));
-    //   if (data) {
-    //     this.userService.getUsersId(data.email || data['email']).subscribe(users => {
-    //       this.user = users[0];
-    //       if (users[0]) {
-    //         if (this.user['$key']) {
-    //           this.perfilForm.reset();
-    //           this.perfilForm.controls['id'].setValue(this.user['$key']);
-    //           this.perfilForm.controls['nome'].setValue(this.user['nome']);
-    //           this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
-    //           this.perfilForm.controls['horario'].setValue(this.user['horario']);
-    //           this.perfilForm.controls['email'].setValue(this.user['email']);
-    //           this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
-    //         }
-    //       } else {
-    //         this.router.navigate(['login']);
-    //       }
-    //     });
-    //   }
-    // });
+        // this.authenticationService.getProfile().subscribe(dados => {
+          // if (dados) {
+
+
+            this.userService.getUsersId(usuario.user.email).subscribe(users => {
+              this.user = users[0];
+              console.log(this.user);
+              if (users[0]) {
+                if (this.user['$key']) {
+                  this.perfilForm.reset();
+                  this.perfilForm.controls['id'].setValue(this.user['$key']);
+                  this.perfilForm.controls['nome'].setValue(this.user['nome']);
+                  this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
+                  this.perfilForm.controls['horario'].setValue(this.user['horario']);
+                  this.perfilForm.controls['email'].setValue(this.user['email']);
+                  this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
+                }
+              } else {
+                this.router.navigate(['login']);
+              }
+            });
+          }
+
+
+      // });
+    // }
+    );
+
 
   }
 
   tirarFoto() {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
+    // const options: CameraOptions = {
+    //   quality: 100,
+    //   destinationType: this.camera.DestinationType.FILE_URI,
+    //   encodingType: this.camera.EncodingType.JPEG,
+    //   mediaType: this.camera.MediaType.PICTURE
+    // }
 
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-      // Handle error
-    });
+    // this.camera.getPicture(options).then((imageData) => {
+    //   // imageData is either a base64 encoded string or a file URI
+    //   // If it's base64 (DATA_URL):
+    //   let base64Image = 'data:image/jpeg;base64,' + imageData;
+    // }, (err) => {
+    //   // Handle error
+    // });
   }
 
   onUpdate() {
