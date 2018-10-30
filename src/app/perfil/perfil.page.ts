@@ -79,29 +79,57 @@ export class PerfilPage implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    this.authenticationService.getProfile().subscribe(data => {
-      alert(JSON.stringify(data));
-      if (data) {
-        this.userService.getUsersId(data.email || data['email']).subscribe(users => {
-          this.user = users[0];
-          if (users[0]) {
-            if (this.user['$key']) {
-              this.perfilForm.reset();
-              this.perfilForm.controls['id'].setValue(this.user['$key']);
-              this.perfilForm.controls['nome'].setValue(this.user['nome']);
-              this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
-              this.perfilForm.controls['horario'].setValue(this.user['horario']);
-              this.perfilForm.controls['email'].setValue(this.user['email']);
-              this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
-            }
-          } else {
-            this.router.navigate(['login']);
-          }
-        });
+
+    let dadosUser = this.storage.get('userCurrent').then(
+      (data: any) => {
+        
+        if (data) {
+          console.log('Valor do usuario logado' + data);
+ 
+          // this.userService.getUsersId(data.email || data['email']).subscribe(users => {
+          //   this.user = users[0];
+          //   if (users[0]) {
+          //     if (this.user['$key']) {
+          //       this.perfilForm.reset();
+          //       this.perfilForm.controls['id'].setValue(this.user['$key']);
+          //       this.perfilForm.controls['nome'].setValue(this.user['nome']);
+          //       this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
+          //       this.perfilForm.controls['horario'].setValue(this.user['horario']);
+          //       this.perfilForm.controls['email'].setValue(this.user['email']);
+          //       this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
+          //     }
+          //   } else {
+          //     this.router.navigate(['login']);
+          //   }
+          // });
+        }
+
       }
-    });
-    
+    )
+    alert()
+
+    // this.authenticationService.getProfile().subscribe(data => {
+    //   // alert(JSON.stringify(data));
+    //   if (data) {
+    //     this.userService.getUsersId(data.email || data['email']).subscribe(users => {
+    //       this.user = users[0];
+    //       if (users[0]) {
+    //         if (this.user['$key']) {
+    //           this.perfilForm.reset();
+    //           this.perfilForm.controls['id'].setValue(this.user['$key']);
+    //           this.perfilForm.controls['nome'].setValue(this.user['nome']);
+    //           this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
+    //           this.perfilForm.controls['horario'].setValue(this.user['horario']);
+    //           this.perfilForm.controls['email'].setValue(this.user['email']);
+    //           this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
+    //         }
+    //       } else {
+    //         this.router.navigate(['login']);
+    //       }
+    //     });
+    //   }
+    // });
+
   }
 
   tirarFoto() {
@@ -111,13 +139,13 @@ export class PerfilPage implements OnInit {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
-    
+
     this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     let base64Image = 'data:image/jpeg;base64,' + imageData;
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
     }, (err) => {
-     // Handle error
+      // Handle error
     });
   }
 
