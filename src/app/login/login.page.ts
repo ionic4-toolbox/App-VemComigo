@@ -97,8 +97,8 @@ export class LoginPage implements OnInit {
           console.log("Logado");
         },
         error => {
-          console.log("Erros encontrados: ", error.code);
-
+          // console.log("Erros encontrados: ", error.code);
+          
           if (error.code === "auth/wrong-password") {
             this.presentAlert("Usuário ou senha invalido.");
           } else if (error.code === "auth/user-not-found") {
@@ -126,6 +126,7 @@ export class LoginPage implements OnInit {
         this._firebaseAuth.auth.signInWithCredential(facebookCredential).then((dados) => {
           // Guardando os dados na sessão
           this.storage.set('userCurrent', JSON.stringify(dados));
+          // this.router.navigateByUrl("/home");
           this.router.navigateByUrl("/home");
         });
 

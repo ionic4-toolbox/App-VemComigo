@@ -43,6 +43,10 @@ export class AuthenticationService {
     return this._firebaseAuth.auth
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(data => {
+
+        console.log('Dados: ', data);
+        
+        this.storage.set('userCurrent', JSON.stringify(data));
         this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
           this.authenticationState.next(true);
         });
