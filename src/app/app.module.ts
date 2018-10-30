@@ -19,6 +19,7 @@ import { environment } from '../environments/environment';
 import { AuthGuardService } from './service/auth-guard.service';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { UserService } from './service/user.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,7 +41,8 @@ import { Camera } from '@ionic-native/camera/ngx';
     AuthGuardService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Facebook,
-    Camera
+    Camera,
+    UserService
   ],
   bootstrap: [
     AppComponent

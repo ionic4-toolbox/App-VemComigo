@@ -38,7 +38,8 @@ export class UserService {
     return this.users;
   }
 
-  getUsersId(email) {
+  getUsersId(email: string) {
+    console.log('Email: ', email);
     this._userCollection = this._af.collection<User>( config.collection_endpoint_user, x => x.where('email', '==' , email ));
     this.users = this._userCollection.snapshotChanges().pipe(
       map(actions => {

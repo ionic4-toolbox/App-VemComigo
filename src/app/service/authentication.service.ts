@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
+import { UserService } from './user.service';
 
 const TOKEN_KEY = 'auth-token';
 
@@ -19,7 +20,8 @@ export class AuthenticationService {
   constructor(
     private storage: Storage,
     private plt: Platform,
-    private _firebaseAuth: AngularFireAuth
+    private _firebaseAuth: AngularFireAuth,
+    private userService: UserService
   ) {
     this.user = _firebaseAuth.authState;
     this.plt.ready().then(() => {
@@ -45,7 +47,7 @@ export class AuthenticationService {
       .then(data => {
 
         console.log('Dados: ', data);
-        
+
         this.storage.set('userCurrent', JSON.stringify(data));
         this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
           this.authenticationState.next(true);
@@ -67,19 +69,57 @@ export class AuthenticationService {
 
   signInWithFacebook(data?: any): void {
 
-    // return this._firebaseAuth.auth.signInWithPopup(
-    //   new firebase.auth.FacebookAuthProvider()
-    // ).then(
-      // () => {
-        this.storage.set('userCurrent', JSON.stringify(data.user)).then(() => {
+    this.storage.set('userCurrent', JSON.stringify(data.user)).then(() => {
+      this.authenticationState.next(true);
+    });
+    this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
+      this.authenticationState.next(true);
+    });
+
+  }
+
+  signInWithFacebookWeb() {
+
+    return this._firebaseAuth.auth.signInWithPopup(
+      new firebase.auth.FacebookAuthProvider()
+    ).then(
+      (dados: any) => {
+
+        const dadosList = dados;
+
+        // Cadastrando o usuario que veio do facebook
+        const users = {
+          id: dadosList.user.uid,
+          nome: dadosList.user.displayName,
+          sobrenome: dadosList.user.displayName,
+          turma: '',
+          horario: '',
+          email: dadosList.user.email,
+          telefone: 99999999
+        };
+
+        console.log('dados: ', dadosList.user);
+        console.log('Destino: ', users);
+
+        this.userService.addUsers(users).then(
+          data => {
+            console.log('Resultado da inserção: ', data);
+          },
+          error => console.log('Erros encontrados: ', error)
+        );
+
+        this.storage.set('userCurrent', JSON.stringify(dados)).then(() => {
           this.authenticationState.next(true);
         });
+
         this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
           this.authenticationState.next(true);
         });
-      // }
 
-    // );
+      }
+
+    );
+
   }
 
   logout() {
