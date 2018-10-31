@@ -1,52 +1,66 @@
 {
     "items": [
         {
-            "name": "Como usar o aplicativo ?",
+            "name": "O que é o #VemComigo?",
             "children": [
                 {
-                    "name": "Special Academy Pizza",
-                    "information": "Pastrami pork belly ball tip andouille corned beef jerky shankle landjaeger. Chicken chuck porchetta picanha, ham brisket tenderloin venison meatloaf landjaeger jowl.",
-                    "price": "$25"
+                    "information": "É um app que te ajuda a encontrar uma amiga que possa te acompanhar no seu trajeto."
                 }
             ]
         },
         {
-            "name": "Como alterar meu perfil ?",
+            "name": "Quem pode se cadastrar no #VemComigo ?",
             "children": [
                 {
-                    "name": "Special Academy Pizza",
-                    "information": "Pastrami pork belly ball tip andouille corned beef jerky shankle landjaeger. Chicken chuck porchetta picanha, ham brisket tenderloin venison meatloaf landjaeger jowl.",
-                    "price": "$25"
+                    "information": "Apenas mulheres que desenvolvem alguma atividade dentro do Senac Lapa Tito."
                 }
             ]
         },        
         {
-            "name": "Como achar uma amiga ?",
+            "name": "Como me cadastro no #VemComigo ?",
             "children": [
                 {
-                    "name": "Special Academy Pizza",
-                    "information": " Landjaeger fatback shank frankfurter, tongue shoulder ham strip steak pancetta pork short loin corned beef short ribs biltong cow",
-                    "price": "$25"
+                    "information": "É fácil, você pode acessar com a sua conta do Facebook ou criar um conta através do seu e-mail."
                 }
             ]
         }, 
         {
-            "name": "Como achar uma amiga ?",
+            "name": "Consigo chamar um carro do aplicativo de transportes direto do #VemComigo?",
             "children": [
                 {
-                    "name": "Special Academy Pizza",
-                    "information": " Landjaeger fatback shank frankfurter, tongue shoulder ham strip steak pancetta pork short loin corned beef short ribs biltong cow",
-                    "price": "$25"
+                    "information": " Não, o app #VemComigo não tem nenhuma relação ou integração com aplicativos de transporte."
                 }
             ]
         },       
         {
-            "name": "Como deletar o Perfil?",
+            "name": "Minha busca deu certo, e agora o que eu faço?",
             "children": [
                 {
-                    "name": "Special Academy Pizza",
-                    "information": " Landjaeger fatback shank frankfurter, tongue shoulder ham strip steak pancetta pork short loin corned beef short ribs biltong cow",
-                    "price": "$25"
+                    "information": " Conversa com a sua amiga pelo WhatsApp. O ícone fica junto aos nomes que apareceram no resultado da sua busca. Combina com ela a melhor maneira de ir embora (carro, ônibus, metrô, bike)."
+                }
+            ]
+        },       
+        {
+            "name": "Preciso estar online para que a busca funcione?",
+            "children": [
+                {
+                    "information": " Sim, o #VemComigo precisa de internet para funcionar."
+                }
+            ]
+        },       
+        {
+            "name": "Não obtive resultados na busca e agora?",
+            "children": [
+                {
+                    "information": " Sinto muito amiga, infelizmente nenhuma mulher cadastrou em nosso app uma região semelhante a sua."
+                }
+            ]
+        },       
+        {
+            "name": "Durante o uso do #VemComigo recebi uma mensagem de erro. Como faço pra resolver?",
+            "children": [
+                {
+                    "information": " Qualquer problema com a funcionalidade do #VemComigo pode ser relatada com um comentáriO na PlayStore ou AppleStore. Assim que possível retornaremos o seu comentário."
                 }
             ]
         }

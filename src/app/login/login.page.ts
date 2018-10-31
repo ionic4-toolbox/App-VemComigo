@@ -12,6 +12,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from '../models/user.model';
 import { UserService } from '../service/user.service';
 
+const TOKEN_KEY = 'auth-token';
+
 export class Model {
   constructor(objeto?) {
     Object.assign(this, objeto);
@@ -120,10 +122,10 @@ export class LoginPage implements OnInit {
 
     return this.facebook.login(permissions)
       .then(response => {
-
+        // alert('Dados: ' + JSON.stringify(response));
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
         this._firebaseAuth.auth.signInWithCredential(facebookCredential).then((dados) => {
-
+          // alert('Dados: ' + JSON.stringify(dados));
           // Cadastrando o usuario que veio do facebook
           const users = {
             id: dados.uid,
@@ -135,7 +137,7 @@ export class LoginPage implements OnInit {
             telefone: 99999999
           };
 
-          console.log('dados: ', dados);
+          // alert('dados: ' + JSON.stringify(users));
 
           this.userService.addUsers(users).then(
             data => {
@@ -145,9 +147,10 @@ export class LoginPage implements OnInit {
           );
 
           // Guardando os dados na sessão
-          this.storage.set('userCurrent', JSON.stringify(dados));
-          // this.router.navigateByUrl('/home');
+          // this.storage.set('userCurrent', JSON.stringify(dados));
+          this.authService.signInWithFacebook(dados);
           this.router.navigateByUrl('/home');
+          // this.router.navigateByUrl('/home');
         });
 
       }).catch((error) => { alert('Error: ' + error); });
