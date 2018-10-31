@@ -68,8 +68,8 @@ export class AuthenticationService {
   }
 
   signInWithFacebook(data?: any): void {
-
-    this.storage.set('userCurrent', JSON.stringify(data.user)).then(() => {
+    // alert('signInWithFacebook: ' + JSON.stringify(data))
+    this.storage.set('userCurrent', JSON.stringify(data)).then(() => {
       this.authenticationState.next(true);
     });
     this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {

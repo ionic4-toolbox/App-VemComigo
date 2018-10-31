@@ -84,15 +84,15 @@ export class PerfilPage implements OnInit {
 
         const usuario = JSON.parse(data);
 
-        console.log('Dados storage: ', usuario.user);
+        // alert('Dados storage: ' + JSON.stringify(usuario));
 
         // this.authenticationService.getProfile().subscribe(dados => {
           // if (dados) {
 
 
-            this.userService.getUsersId(usuario.user.email).subscribe(users => {
+            this.userService.getUsersId(usuario.email || usuario.user.email).subscribe(users => {
               this.user = users[0];
-              console.log(this.user);
+              // console.log(this.user);
               if (users[0]) {
                 if (this.user['$key']) {
                   this.perfilForm.reset();
