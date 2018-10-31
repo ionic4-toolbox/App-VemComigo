@@ -30,24 +30,35 @@
 
   <!-- Div com resultado de buscas -->
   <div *ngIf="!btnBuscar">
-    <ion-list *ngFor="let item of destinos; let i = index" [attr.data-index]="i" style="color: red;">
-      <ion-item>
+    <ion-card *ngFor="let item of destinos; let i = index" [attr.data-index]="i">
+      <ion-item style="padding-bottom: 5px; padding-top: 15px;">
         <ion-avatar slot="start">
           <img src="assets/img/avatar-finn.png">
-          <ion-label style="font-size: 15px;">Isabella Silva</ion-label>
         </ion-avatar>
-        <ion-label>
-          <h3>A-B DESTINO</h3>
-          <p>TIJUCA</p>
-          <h3>A-B DESTINO</h3>
-          <p>TIJUCA</p>
-          <div class="imgWhatsZapBusca">
-            <img src="assets/img/icon-whatsapp.png">
-          </div>
+        <ion-label>Isabella Silva</ion-label>
+        <ion-icon name="logo-whatsapp" color="success" slot="end"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-icon color="danger" name="walk" slot="start"></ion-icon>
+        <ion-label text-wrap>
+          <small>Destino</small>
+          <h2>Tijuca</h2>
         </ion-label>
       </ion-item>
-    </ion-list>
-
+      <ion-item>
+        <ion-icon color="danger" name="car" slot="start"></ion-icon>
+        <ion-label text-wrap>
+          <small>Meio de transporte</small>
+          <h2>Carro</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon color="danger" name="pin" slot="start"></ion-icon>
+        <ion-label text-wrap>
+          <small>Ponto de encontro</small>
+          <h2>Ponto de ônibus</h2>
+        </ion-label>
+      </ion-item>
+    </ion-card>
   </div>
-
 </ion-content>
