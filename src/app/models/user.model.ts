@@ -5,5 +5,5 @@ export class User {
     turma: string;
     horario: string;
     email: string;
-    telefone: number;
+    telefone: string;
 }

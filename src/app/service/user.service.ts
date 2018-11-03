@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { config } from '../app.config';
 import { User } from '../models/user.model';
-import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class UserService {
@@ -56,7 +55,18 @@ export class UserService {
 
   // Adiciona um novo usuario
   addUsers(user) {
-    return this._userCollection.add(user);
+    
+    /*
+      OLD - Apenas inserir sem vincular o id do usuario
+    */
+    // return this._userCollection.add(user);
+    
+    /* 
+      NEW - Insere novo registro vinculando registro do usuario autenticado ao novo usuario inserido
+    */
+    this.userDoc = this._af.doc<User>(`${config.collection_endpoint_user}/${user.id}` );
+    return this.userDoc.set(user);
+
   }
 
   // Atualiza os dados do usuário

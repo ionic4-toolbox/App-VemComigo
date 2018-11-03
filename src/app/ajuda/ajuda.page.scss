@@ -29,12 +29,22 @@ ion-button {
   
   .section-active .float-right {
       color: #fff;
+      font-size: 20px;
+      position: absolute;
+      margin: 0px 120px 10px;
   }
   
   .float-right {
     margin-left: auto;
     order: 2;
     color: #7bc2bc;
+  }
+
+  float-right-list {
+    margin-left: auto;
+    order: 2;
+    color: #7bc2bc;
+    font-size: 18px;
   }
   
   .hover-click {

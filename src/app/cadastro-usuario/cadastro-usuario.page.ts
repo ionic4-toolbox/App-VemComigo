@@ -21,11 +21,9 @@ export class CadastroUsuarioPage implements OnInit {
   ) {
     this.cadUserForm = this.fb.group(
       {
-        origem: ['teste'],
-        horarioOrigemSaida: ['teste'],
-        numCelular: ['teste'],
-        destino: ['teste'],
-        horarioDestinoSaida: ['teste'],
+        destino: [''],
+        horarioOrigemSaida: [''],
+        numCelular: ['']
       }
     );
   }

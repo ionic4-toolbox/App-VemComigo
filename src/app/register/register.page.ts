@@ -6,6 +6,8 @@ import { AuthenticationService } from '../service/authentication.service';
 import { User } from '../models/user.model';
 import { Credenciais } from '../models/credenciais.model';
 import { UserService } from '../service/user.service';
+import { storage } from 'firebase';
+
 
 @Component({
   selector: 'app-register',
@@ -60,9 +62,11 @@ export class RegisterPage {
       this.credenciais = { email: data.email, password: data.password };
 
       this.authenticationService.signUp(this.credenciais).then(
-        () => {
+        data => {
+          console.log(data.user)
           if ( data ) {
-            this.cadastrarEmailUsuario(data.email);
+            this.cadastrarEmailUsuario(data.user.email, data.user.uid);
+            
             this.router.navigateByUrl('cadastro-usuario');
           }
         },
@@ -76,16 +80,16 @@ export class RegisterPage {
     }
   }
 
-  cadastrarEmailUsuario(pEmail: string): void {
+  cadastrarEmailUsuario(pEmail: string, pUid: string): void {
 
     this.user = {
-      id: '',
+      id: pUid,
       nome: '',
       sobrenome: '',
       turma: '',
       horario: '',
       email: pEmail,
-      telefone: 99999999
+      telefone: ''
     };
 
     this.userService.addUsers(this.user).then(

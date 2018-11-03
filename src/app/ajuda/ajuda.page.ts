@@ -22,6 +22,13 @@ export class AjudaPage {
 
   }
 
+  myHeaderFn(record, recordIndex, records) {
+    if (recordIndex % 20 === 0) {
+      return 'Header ' + recordIndex;
+    }
+    return null;
+  }
+
   toggleSection(i) {
     this.information[i].open = !this.information[i].open;
   }
