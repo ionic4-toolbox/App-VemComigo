@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DestinoService } from '../service/destinos.service';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -17,13 +18,15 @@ export class CadastroUsuarioPage implements OnInit {
     private fb: FormBuilder,
     private destinoService: DestinoService,
     public alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private storage: Storage
   ) {
     this.cadUserForm = this.fb.group(
       {
         destino: [''],
         horarioOrigemSaida: [''],
-        numCelular: ['']
+        numCelular: [''],
+        idUser: ['']
       }
     );
   }
@@ -41,17 +44,25 @@ export class CadastroUsuarioPage implements OnInit {
   }
 
   onSubmit() {
+    this.storage.get('userCad').then(
+      (data: any) => {
+        this.cadUserForm.controls['idUser'].setValue({'userId': data});
+        console.log(this.cadUserForm.value);
+        this.destinoService.addDestino(this.cadUserForm.value, this.cadUserForm.value.idUser);
+        // .then(
+    
+        //   data => {
+            
+        //     this.router.navigateByUrl('/login');
+        //     this.presentAlert();
 
-    console.log('Dados do formulario: ', this.cadUserForm.value);
-    this.destinoService.addDestino(this.cadUserForm.value).then(
+        //   },
 
-      data => {
-        console.log('Dados', data);
-        this.router.navigateByUrl('/login');
-        this.presentAlert();
-      },
-      error => console.log('Erros encontrados: ', error)
-    );
+        //   error => console.log('Erros encontrados: ', error)
+        // );
+
+      }
+    )
 
   }
 

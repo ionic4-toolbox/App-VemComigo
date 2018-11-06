@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { config } from '../app.config';
 import { User } from '../models/user.model';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class UserService {
@@ -19,7 +20,10 @@ export class UserService {
   users: Observable<User[]>;
   countItems: number;
 
-  constructor(private _af: AngularFirestore) {
+  constructor(
+    private _af: AngularFirestore,
+    private storage: Storage,
+  ) {
     this._userCollection = _af.collection<User>( config.collection_endpoint_user, x => x.orderBy('nome', 'asc'));
   }
 
@@ -55,7 +59,7 @@ export class UserService {
 
   // Adiciona um novo usuario
   addUsers(user) {
-    
+    this.storage.set('userCad', user.id);
     /*
       OLD - Apenas inserir sem vincular o id do usuario
     */

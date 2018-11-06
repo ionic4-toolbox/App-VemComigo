@@ -10,7 +10,7 @@ import { AuthenticationService } from '../service/authentication.service';
 import { Storage } from '@ionic/storage';
 
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 @Component({
   selector: 'app-perfil',
@@ -21,7 +21,6 @@ export class PerfilPage implements OnInit {
   perfilForm: FormGroup;
   submitted = false;
   user: User;
-
 
   constructor(
     private fb: FormBuilder,
@@ -80,58 +79,46 @@ export class PerfilPage implements OnInit {
 
   ngOnInit(): void {
     this.storage.get('userCurrent').then(
-    (data: any) => {
+      (data: any) => {
 
         const usuario = JSON.parse(data);
-
-        // alert('Dados storage: ' + JSON.stringify(usuario));
-
-        // this.authenticationService.getProfile().subscribe(dados => {
-          // if (dados) {
-
-
-            this.userService.getUsersId(usuario.email || usuario.user.email).subscribe(users => {
-              this.user = users[0];
-              // console.log(this.user);
-              if (users[0]) {
-                if (this.user['$key']) {
-                  this.perfilForm.reset();
-                  this.perfilForm.controls['id'].setValue(this.user['$key']);
-                  this.perfilForm.controls['nome'].setValue(this.user['nome']);
-                  this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
-                  this.perfilForm.controls['horario'].setValue(this.user['horario']);
-                  this.perfilForm.controls['email'].setValue(this.user['email']);
-                  this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
-                }
-              } else {
-                this.router.navigate(['login']);
-              }
-            });
+        console.log('usuario: ', usuario);
+        this.userService.getUsersId(usuario.email || usuario.user.email).subscribe(users => {
+          this.user = users[0];
+          if (users[0]) {
+            if (this.user['$key']) {
+              this.perfilForm.reset();
+              this.perfilForm.controls['id'].setValue(this.user['$key']);
+              this.perfilForm.controls['nome'].setValue(this.user['nome']);
+              this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
+              this.perfilForm.controls['horario'].setValue(this.user['horario']);
+              this.perfilForm.controls['email'].setValue(this.user['email']);
+              this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
+            }
+          } else {
+            // this.router.navigate(['login']);
+            this.presentAlert('Página Perfil', 'Não foi possível carregar os dados', ['OK'])
           }
-
-
-      // });
-    // }
+        });
+      }
     );
-
-
   }
 
   tirarFoto() {
-    // const options: CameraOptions = {
-    //   quality: 100,
-    //   destinationType: this.camera.DestinationType.FILE_URI,
-    //   encodingType: this.camera.EncodingType.JPEG,
-    //   mediaType: this.camera.MediaType.PICTURE
-    // }
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
 
-    // this.camera.getPicture(options).then((imageData) => {
-    //   // imageData is either a base64 encoded string or a file URI
-    //   // If it's base64 (DATA_URL):
-    //   let base64Image = 'data:image/jpeg;base64,' + imageData;
-    // }, (err) => {
-    //   // Handle error
-    // });
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      // Handle error
+    });
   }
 
   onUpdate() {

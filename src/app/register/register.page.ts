@@ -6,8 +6,6 @@ import { AuthenticationService } from '../service/authentication.service';
 import { User } from '../models/user.model';
 import { Credenciais } from '../models/credenciais.model';
 import { UserService } from '../service/user.service';
-import { storage } from 'firebase';
-
 
 @Component({
   selector: 'app-register',

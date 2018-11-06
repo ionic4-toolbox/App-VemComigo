@@ -37,8 +37,10 @@ export class DestinoService {
 
   }
 
-  addDestino(destino: Destino) {
-    return this._destinoCollection.add(destino);
+  addDestino(destino: Destino, userId: string) {
+    // return this._destinoCollection.add(destino);
+    this.destinoDoc = this._af.doc<Destino>(`${config.collection_endpoint}/${userId}`);
+    this.destinoDoc.set(destino);
   }
 
   updateDestino(id: number, destino: Destino) {

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { RegisterPage } from './register.page';
 import { UserService } from '../service/user.service';
-
+import { IonicStorageModule } from '@ionic/storage';
 
 
 const routes: Routes = [
@@ -23,7 +23,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    IonicStorageModule.forRoot()
   ],
   declarations: [RegisterPage],
   providers: [UserService]
