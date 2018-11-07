@@ -64,8 +64,8 @@ export class UserService {
       OLD - Apenas inserir sem vincular o id do usuario
     */
     // return this._userCollection.add(user);
-    
-    /* 
+
+    /*
       NEW - Insere novo registro vinculando registro do usuario autenticado ao novo usuario inserido
     */
     this.userDoc = this._af.doc<User>(`${config.collection_endpoint_user}/${user.id}` );

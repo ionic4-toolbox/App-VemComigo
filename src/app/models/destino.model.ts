@@ -1,5 +1,4 @@
 export interface Destino {
-    numCelular: string;
+    id: string;
     destino: string;
-    horarioDestinoSaida: string;
 }
