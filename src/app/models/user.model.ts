@@ -1,9 +1,6 @@
 export class User {
-    id: string;
+    uuid: string;
     nome: string;
-    sobrenome: string;
-    turma: string;
-    horario: string;
     email: string;
     telefone: string;
 }

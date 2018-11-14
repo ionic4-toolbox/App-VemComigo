@@ -81,11 +81,8 @@ export class RegisterPage {
   cadastrarEmailUsuario(pEmail: string, pUid: string): void {
 
     this.user = {
-      id: pUid,
+      uuid: pUid,
       nome: '',
-      sobrenome: '',
-      turma: '',
-      horario: '',
       email: pEmail,
       telefone: ''
     };
