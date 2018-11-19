@@ -4,6 +4,7 @@ import { DestinoService } from '../service/destinos.service';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { Bairro } from '../models/bairro.model';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -13,6 +14,7 @@ import { Storage } from '@ionic/storage';
 export class CadastroUsuarioPage implements OnInit {
 
   cadUserForm: FormGroup;
+  bairros: any;
 
   constructor(
     private fb: FormBuilder,
@@ -21,6 +23,7 @@ export class CadastroUsuarioPage implements OnInit {
     private router: Router,
     private storage: Storage
   ) {
+
     this.cadUserForm = this.fb.group(
       {
         destino: [''],
@@ -29,9 +32,13 @@ export class CadastroUsuarioPage implements OnInit {
         idUser: ['']
       }
     );
+
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // Lista todos os destinos encontrados
+    this.getBairros();
+  }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -46,13 +53,14 @@ export class CadastroUsuarioPage implements OnInit {
   onSubmit() {
     this.storage.get('userCad').then(
       (data: any) => {
-        this.cadUserForm.controls['idUser'].setValue({'userId': data});
+        // this.cadUserForm.controls['idUser'].setValue({'userId': data});
         console.log(this.cadUserForm.value);
-        this.destinoService.addDestino(this.cadUserForm.value, this.cadUserForm.value.idUser);
+        // , this.cadUserForm.value.idUser
+        this.destinoService.addDestino(this.cadUserForm.value);
         // .then(
-    
+
         //   data => {
-            
+
         //     this.router.navigateByUrl('/login');
         //     this.presentAlert();
 
@@ -62,8 +70,19 @@ export class CadastroUsuarioPage implements OnInit {
         // );
 
       }
-    )
+    );
 
+  }
+
+
+  getBairros() {
+    this.destinoService.getBairrosDestinos()
+    .subscribe( data => this.bairros = data
+      // (data: Bairro) => this.bairros = {
+      //   id: data['id'],
+      //   nome:  data['nome']
+      // }
+    );
   }
 
 }

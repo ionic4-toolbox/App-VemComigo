@@ -60,11 +60,10 @@ export class RegisterPage {
       this.credenciais = { email: data.email, password: data.password };
 
       this.authenticationService.signUp(this.credenciais).then(
-        data => {
-          console.log(data.user)
+        (data: any) => {
           if ( data ) {
             this.cadastrarEmailUsuario(data.user.email, data.user.uid);
-            
+
             this.router.navigateByUrl('cadastro-usuario');
           }
         },
@@ -80,12 +79,7 @@ export class RegisterPage {
 
   cadastrarEmailUsuario(pEmail: string, pUid: string): void {
 
-    this.user = {
-      uuid: pUid,
-      nome: '',
-      email: pEmail,
-      telefone: ''
-    };
+    this.user = { id: pUid, nome: '', email: pEmail, telefone: '' };
 
     this.userService.addUsers(this.user).then(
       data => {

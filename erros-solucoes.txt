@@ -1,3 +1,12 @@
+Api para buscar lista de bairros que usei neste projeto:
+
+API - IBGE
+-----------------------
+http://servicodados.ibge.gov.br/api/v1/localidades/estados/35
+https://servicodados.ibge.gov.br/api/v1/localidades/estados
+http://servicodados.ibge.gov.br/api/v1/localidades/estados/35/municipios
+https://servicodados.ibge.gov.br/api/docs/localidades#api-Municipios-estadosUFMunicipiosGet
+
+
 ## Solução de erros encontrados ao trabalhar com facebook
 
-de erros e soluções 
