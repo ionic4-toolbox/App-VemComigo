@@ -57,7 +57,7 @@ export class DestinoService {
     
     // Viagens
     this.viagensDoc = this._af.doc<Viagens>(`${config.collection_endpoint_viagens}/${userId}`);
-    this.destinoDoc.set(this.viagens);
+    // this.destinoDoc.set(this.viagens);
 
     return this._destinoCollection.add(destino);
     
