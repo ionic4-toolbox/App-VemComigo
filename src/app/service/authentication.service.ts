@@ -24,6 +24,7 @@ export class AuthenticationService {
     private userService: UserService
   ) {
     this.user = _firebaseAuth.authState;
+    console.log(this.user);
     this.plt.ready().then(() => {
       this.checkToken();
     });
@@ -134,6 +135,15 @@ export class AuthenticationService {
 
   getProfile() {
     return this.user;
+  }
+
+  deleteProfile() {
+    var user = this._firebaseAuth.auth.currentUser;
+    user.delete().then((dados: any) => {
+      console.log('Usuário deletado com sucesso!')
+    }).catch((error: Error) => {
+      console.log('Não foi possível deletar o usuário!', error)
+    });
   }
 
 }

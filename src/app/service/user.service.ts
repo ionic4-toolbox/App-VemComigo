@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { config } from '../app.config';
 import { User } from '../models/user.model';
 import { Storage } from '@ionic/storage';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class UserService {
