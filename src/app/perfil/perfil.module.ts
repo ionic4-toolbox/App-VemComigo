@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { Camera } from '@ionic-native/camera/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
 
 import { PerfilPage } from './perfil.page';
 import { UserService } from '../service/user.service';
@@ -21,7 +22,8 @@ import { UserService } from '../service/user.service';
         path: '',
         component: PerfilPage
       }
-    ])
+    ]),
+    NgxViacepModule
   ],
   providers: [
     UserService,

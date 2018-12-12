@@ -28,7 +28,7 @@ export class DestinoService {
 
   constructor(private _af: AngularFirestore, private http: HttpClient) {
     
-    this._destinoCollection = _af.collection<Destino>( config.collection_endpoint , x => x.orderBy('origem', 'asc'));
+    this._destinoCollection = _af.collection<Destino>( config.collection_endpoint_destinos );
     this.destinos = this._destinoCollection.valueChanges();
 
     this._viagensCollection = _af.collection<Viagens>(config.collection_endpoint_viagens);
@@ -40,12 +40,14 @@ export class DestinoService {
     this.destinos = this._destinoCollection.snapshotChanges().pipe(
       map(actions => {
         this.countItems = actions.length;
+        console.log(this.countItems);
         return actions.map(action => ({
           $key: action.payload.doc.id,
           ...action.payload.doc.data()
         }));
       })
     );
+    console.log(this.destinos);
     return this.destinos;
   }
 

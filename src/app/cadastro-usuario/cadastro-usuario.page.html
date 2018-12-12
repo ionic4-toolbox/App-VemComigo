@@ -8,7 +8,6 @@
     <form [formGroup]="cadUserForm" (ngSubmit)="onSubmit()" novalidate>
       <ion-item>
         <ion-label position="floating">Vai pegar(ou dar) carona pra aonde?</ion-label>
-        <!-- <ion-input formControlName="destino" type="text"></ion-input> -->
         <ion-select formControlName="destino">
           <ion-select-option *ngFor="let bairro of bairros"  value="{{bairro.id}}">{{bairro.nome}}</ion-select-option>
         </ion-select>

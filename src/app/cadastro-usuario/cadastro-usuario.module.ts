@@ -5,8 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
+
 import { CadastroUsuarioPage } from './cadastro-usuario.page';
 import { DestinoService } from '../service/destinos.service';
+import { HttpClientModule } from '@angular/common/http';
+
 
 const routes: Routes = [
   {
@@ -21,7 +25,9 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgxViacepModule,
+    HttpClientModule
   ],
   declarations: [CadastroUsuarioPage],
   providers: [DestinoService]

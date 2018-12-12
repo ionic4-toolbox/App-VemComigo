@@ -52,20 +52,9 @@ export class CadastroUsuarioPage implements OnInit {
     this.storage.get('userCad').then(
       (data: any) => {
         this.cadUserForm.controls['idUser'].setValue({'userId': data});
-        // , this.cadUserForm.value.idUser
         this.destinoService.addDestino(this.cadUserForm.value);
-        // .then(
-
-        //   data => {
-
         this.router.navigateByUrl('/login');
         this.presentAlert();
-
-        //   },
-
-        //   error => console.log('Erros encontrados: ', error)
-        // );
-
       }
     );
 

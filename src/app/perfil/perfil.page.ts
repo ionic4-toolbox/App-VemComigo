@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
-
-import { User } from '../models/user.model';
-
-import { UserService } from '../service/user.service';
-import { AuthenticationService } from '../service/authentication.service';
 import { Storage } from '@ionic/storage';
-
+import { AlertController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { NgxViacepService } from '@brunoc/ngx-viacep';
+
+import { User } from '../models/user.model';
+import { UserService } from '../service/user.service';
+import { AuthenticationService } from '../service/authentication.service';
+
 
 @Component({
   selector: 'app-perfil',
@@ -31,6 +31,7 @@ export class PerfilPage implements OnInit {
     private camera: Camera,
     private facebook: Facebook,
     private storage: Storage,
+    private viacep: NgxViacepService,
   ) {
     this.perfilForm = fb.group({
       id: [''],
@@ -82,7 +83,6 @@ export class PerfilPage implements OnInit {
       (data: any) => {
 
         const usuario = JSON.parse(data);
-        console.log('usuario: ', usuario);
         this.userService.getUsersId(usuario.email || usuario.user.email).subscribe(users => {
           this.user = users[0];
           if (users[0]) {
@@ -96,8 +96,8 @@ export class PerfilPage implements OnInit {
               this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
             }
           } else {
-            // this.router.navigate(['login']);
-            this.presentAlert('Página Perfil', 'Não foi possível carregar os dados', ['OK'])
+            this.router.navigate(['login']);
+            // this.presentAlert('Página Perfil', 'Não foi possível carregar os dados!', ['OK']);
           }
         });
       }
@@ -147,6 +147,8 @@ export class PerfilPage implements OnInit {
     } else {
       this.userService.deleteUsers(this.user['$key']).then(
         () => {
+          // Chamando a função para deletar o usuario da tabela de autenticacao do firestone
+          this.authenticationService.deleteProfile();
           this.router.navigate(['login']);
         },
         error => console.log('Error: ', error)

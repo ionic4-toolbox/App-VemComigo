@@ -21,10 +21,13 @@ export class BuscaPage implements OnInit {
 
   ngOnInit() {
     this.MostraBtnVoltar = false;
-    this.destinoService.getDestinos().subscribe(data => {
-      this.destinos = data;
-      console.log(data);
-    });
+    this.destinoService.getDestinos().subscribe(
+      (data: any) => {
+        this.destinos = data;
+      },
+      error => {
+        console.log('Erro ao buscar os destinos');
+      });
   }
 
   exibirBusca(pMostraBusca: boolean, pMostraBtnVoltar: boolean) {
