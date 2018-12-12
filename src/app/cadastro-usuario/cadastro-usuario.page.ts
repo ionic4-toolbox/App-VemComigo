@@ -4,7 +4,6 @@ import { DestinoService } from '../service/destinos.service';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { Bairro } from '../models/bairro.model';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -36,7 +35,6 @@ export class CadastroUsuarioPage implements OnInit {
   }
 
   ngOnInit() {
-    // Lista todos os destinos encontrados
     this.getBairros();
   }
 
@@ -53,16 +51,15 @@ export class CadastroUsuarioPage implements OnInit {
   onSubmit() {
     this.storage.get('userCad').then(
       (data: any) => {
-        // this.cadUserForm.controls['idUser'].setValue({'userId': data});
-        console.log(this.cadUserForm.value);
+        this.cadUserForm.controls['idUser'].setValue({'userId': data});
         // , this.cadUserForm.value.idUser
         this.destinoService.addDestino(this.cadUserForm.value);
         // .then(
 
         //   data => {
 
-        //     this.router.navigateByUrl('/login');
-        //     this.presentAlert();
+        this.router.navigateByUrl('/login');
+        this.presentAlert();
 
         //   },
 
