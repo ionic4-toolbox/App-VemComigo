@@ -109,6 +109,278 @@
   },
   {
     "id": 28,
-    "nome": "Aricanduva"
+    "nome": "Ermelino Matarazzo"
+  },
+  {
+    "id": 29,
+    "nome": "Guaianazes"
+  },
+  {
+    "id": 30,
+    "nome": "Iguatemi"
+  },
+  {
+    "id": 31,
+    "nome": "Itaim Paulista"
+  },
+  {
+    "id": 32,
+    "nome": "Itaquera"
+  },
+  {
+    "id": 33,
+    "nome": "Jardim Helena"
+  },
+  {
+    "id": 34,
+    "nome": "José Bonifácio"
+  },
+  {
+    "id": 35,
+    "nome": "Lajeado"
+  },
+  {
+    "id": 36,
+    "nome": "Moóca"
+  },
+  {
+    "id": 37,
+    "nome": "Parque do carmo"
+  },
+  {
+    "id": 38,
+    "nome": "Penha"
+  },
+  {
+    "id": 39,
+    "nome": "Ponte Rasa"
+  },
+  {
+    "id": 40,
+    "nome": "Sapopemba"
+  },
+  {
+    "id": 41,
+    "nome": "São Lucas"
+  },
+  {
+    "id": 42,
+    "nome": "São Matheus"
+  },
+  {
+    "id": 43,
+    "nome": "São Miguel"
+  },
+  {
+    "id": 44,
+    "nome": "São Rafael"
+  },
+  {
+    "id": 45,
+    "nome": "Tatuapé"
+  },
+  {
+    "id": 46,
+    "nome": "Vila Curuçá"
+  },
+  {
+    "id": 47,
+    "nome": "Vila Formosa"
+  },
+  {
+    "id": 48,
+    "nome": "Vila Jacuí"
+  },
+  {
+    "id": 49,
+    "nome": "Vila Matilde"
+  },
+  {
+    "id": 50,
+    "nome": "Vila Prudente"
+  },
+  {
+    "id": 51,
+    "nome": "Cambuci"
+  },
+  {
+    "id": 52,
+    "nome": "Campo Belo"
+  },
+  {
+    "id": 53,
+    "nome": "Campo Grande"
+  },
+  {
+    "id": 54,
+    "nome": "Campo Limpo"
+  },
+  {
+    "id": 55,
+    "nome": "Capão Redondo"
+  },
+  {
+    "id": 56,
+    "nome": "Cidade Ademar"
+  },
+  {
+    "id": 57,
+    "nome": "Cidade Dutra"
+  },
+  {
+    "id": 58,
+    "nome": "Cursinho"
+  },
+  {
+    "id": 59,
+    "nome": "Grajaú"
+  },
+  {
+    "id": 60,
+    "nome": "Ipiranga"
+  },
+  {
+    "id": 61,
+    "nome": "Itaim Bibi"
+  },
+  {
+    "id": 62,
+    "nome": "Jabaquara"
+  },
+  {
+    "id": 63,
+    "nome": "Jardim Ângela"
+  },
+  {
+    "id": 64,
+    "nome": "Jardim Paulista"
+  },
+  {
+    "id": 65,
+    "nome": "Jardim São Luis"
+  },
+  {
+    "id": 66,
+    "nome": "Marsilac"
+  },
+  {
+    "id": 67,
+    "nome": "Moema"
+  },
+  {
+    "id": 68,
+    "nome": "Morumbi"
+  },
+  {
+    "id": 69,
+    "nome": "Parelheiros"
+  },
+  {
+    "id": 70,
+    "nome": "Pedreira"
+  },
+  {
+    "id": 71,
+    "nome": "Sacomã"
+  },
+  {
+    "id": 72,
+    "nome": "Santo Amaro"
+  },
+  {
+    "id": 73,
+    "nome": "Saúde"
+  },
+  {
+    "id": 74,
+    "nome": "Socorro"
+  },
+  {
+    "id": 75,
+    "nome": "Vila Andrade"
+  },
+  {
+    "id": 76,
+    "nome": "Vila Mariana"
+  },
+  {
+    "id": 77,
+    "nome": "Vila Sônia"
+  },
+  {
+    "id": 78,
+    "nome": "Alto de Pinheiros"
+  },
+  {
+    "id": 79,
+    "nome": "Anhanguera"
+  },
+  {
+    "id": 80,
+    "nome": "Brasilândia"
+  },
+  {
+    "id": 81,
+    "nome": "Butantã"
+  },
+  {
+    "id": 82,
+    "nome": "Cachoeirinha"
+  },
+  {
+    "id": 83,
+    "nome": "Freguesia do Ó"
+  },
+  {
+    "id": 84,
+    "nome": "Jaguará"
+  },
+  {
+    "id": 85,
+    "nome": "Jaguaré"
+  },
+  {
+    "id": 86,
+    "nome": "Jaraguá"
+  },
+  {
+    "id": 87,
+    "nome": "Lapa"
+  },
+  {
+    "id": 88,
+    "nome": "Limão"
+  },
+  {
+    "id": 89,
+    "nome": "Perdizes"
+  },
+  {
+    "id": 90,
+    "nome": "Perus"
+  },
+  {
+    "id": 91,
+    "nome": "Pinheiros"
+  },
+  {
+    "id": 92,
+    "nome": "Pirituba"
+  },
+  {
+    "id": 93,
+    "nome": "Raposo Tavares"
+  },
+  {
+    "id": 94,
+    "nome": "Rio Pequeno"
+  },
+  {
+    "id": 95,
+    "nome": "São Domingos"
+  },
+  {
+    "id": 96,
+    "nome": "Vila Leopoldina"
   }
 ]
