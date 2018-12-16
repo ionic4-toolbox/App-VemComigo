@@ -10,10 +10,12 @@ import { Destino } from '../models/destino.model';
 import { Viagens } from './../models/viagens.model';
 import { config } from '../app.config';
 import { HttpClient } from '@angular/common/http';
+import { AlertController } from '@ionic/angular';
 
 @Injectable()
 export class DestinoService {
-  configUrl = 'http://servicodados.ibge.gov.br/api/v1/localidades/estados/35/municipios';
+  // configUrl = 'http://servicodados.ibge.gov.br/api/v1/localidades/estados/35/municipios';
+  configUrl = 'assets/data/bairros.json';
 
   // colecction
   private _destinoCollection: AngularFirestoreCollection<Destino>;
@@ -26,7 +28,11 @@ export class DestinoService {
   viagens: Observable<Viagens[]>;
   countItems: number;
 
-  constructor(private _af: AngularFirestore, private http: HttpClient) {
+  constructor(
+    private _af: AngularFirestore, 
+    private http: HttpClient,
+    public alertController: AlertController
+  ) {
     
     this._destinoCollection = _af.collection<Destino>( config.collection_endpoint_destinos );
     this.destinos = this._destinoCollection.valueChanges();
@@ -40,14 +46,12 @@ export class DestinoService {
     this.destinos = this._destinoCollection.snapshotChanges().pipe(
       map(actions => {
         this.countItems = actions.length;
-        console.log(this.countItems);
         return actions.map(action => ({
           $key: action.payload.doc.id,
           ...action.payload.doc.data()
         }));
       })
     );
-    console.log(this.destinos);
     return this.destinos;
   }
 
@@ -56,13 +60,9 @@ export class DestinoService {
   }
 
   addDestino(destino: Destino, userId?: string) {
-    
-    // Viagens
+    // Dentro de destino nós vamos cadastrar tambem as Viagens. Que são os locais para aonde a pessoa vai junto com outras
     this.viagensDoc = this._af.doc<Viagens>(`${config.collection_endpoint_viagens}/${userId}`);
-    // this.destinoDoc.set(this.viagens);
-
     return this._destinoCollection.add(destino);
-    
   }
 
   updateDestino(id: number, destino: Destino) {
@@ -74,6 +74,5 @@ export class DestinoService {
     this.destinoDoc = this._af.doc<Destino>(`${config.collection_endpoint}/${id}`);
     this.destinoDoc.delete();
   }
-
 
 }
