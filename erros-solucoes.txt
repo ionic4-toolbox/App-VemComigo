@@ -10,3 +10,10 @@ https://servicodados.ibge.gov.br/api/docs/localidades#api-Municipios-estadosUFMu
 
 ## Solução de erros encontrados ao trabalhar com facebook
 
+## Solução para quando o comando de build para o device não funcionar
+-> Ao rodar o comando:
+´ionic cordova build android --device´ 
+-> O error abaixo e apresentado:
+ERRO: o processo "9708" n�o foi encontrado.
+-> Rodar o comando abaixo:
+´cordova clean´

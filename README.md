@@ -37,6 +37,7 @@ ionic cordova platform add android
 **O comando abaixo gera um release que pode ser executada diretamente no celular**
 
 ```sh
+ionic cordova build android --device
 ionic cordova run android --device
 ```
 Se tudo estiver ok. Então o apk será instalado no celular e você podera verificar o aplicativo rodando diretamente no celular.
