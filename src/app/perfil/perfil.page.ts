@@ -4,13 +4,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { Facebook } from '@ionic-native/facebook/ngx';
-import { NgxViacepService } from '@brunoc/ngx-viacep';
 
 import { User } from '../models/user.model';
 import { UserService } from '../service/user.service';
 import { AuthenticationService } from '../service/authentication.service';
-
 
 @Component({
   selector: 'app-perfil',
@@ -29,9 +26,7 @@ export class PerfilPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private camera: Camera,
-    private facebook: Facebook,
-    private storage: Storage,
-    private viacep: NgxViacepService,
+    private storage: Storage
   ) {
     this.perfilForm = fb.group({
       id: [''],
@@ -81,7 +76,6 @@ export class PerfilPage implements OnInit {
   ngOnInit(): void {
     this.storage.get('userCurrent').then(
       (data: any) => {
-
         const usuario = JSON.parse(data);
         this.userService.getUsersId(usuario.email || usuario.user.email).subscribe(users => {
           this.user = users[0];

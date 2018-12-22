@@ -69,6 +69,7 @@ export class RegisterPage {
         },
         error => {
           this.signupError = error.message;
+          console.log(error);
           this.presentAlert('O endereço de e-mail já está sendo usado por outra conta.');
           this.registerForm.reset();
         }
