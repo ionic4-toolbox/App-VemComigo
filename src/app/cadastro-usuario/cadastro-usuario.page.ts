@@ -1,12 +1,11 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { DestinoService } from '../service/destinos.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { LoadingService } from '../service/loading.service';
 import { AlertService } from '../service/alert.service';
 import { UserService } from '../service/user.service';
-import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -19,6 +18,8 @@ export class CadastroUsuarioPage implements OnInit {
   cadUserForm: FormGroup;
   isLoading = false;
   bairros: Object;
+  origine: any;
+  user: any;
 
   constructor(
     private fb: FormBuilder,
@@ -26,6 +27,7 @@ export class CadastroUsuarioPage implements OnInit {
     public alertService: AlertService,
     public loadingService: LoadingService,
     private router: Router,
+    private route: ActivatedRoute,
     private storage: Storage,
     private userService: UserService
   ) {
@@ -42,10 +44,27 @@ export class CadastroUsuarioPage implements OnInit {
   }
 
   ngOnInit() {
+
+    // Pega os dados do registro inserido na tela de cadastro de usuario
+    this.route.queryParams.subscribe(params=> {
+      const pUser = JSON.parse(params['user'])
+      console.log('Parametro passado: ', pUser.user);
+      this.user = pUser.user;
+      // this.user.id        = pUser.user['uid'] || 0;
+      // this.user.nome      = pUser.user['displayName'];
+      // this.user.email     = pUser.user['email'];
+      // this.user.telefone  = pUser.User['phoneNumber'];
+      
+      console.log('Dados usuário: ', this.user);
+
+    })
+
+    // Carrega a listagem de bairros
     this.getBairros();
   }
 
   onSubmit() {
+
     this.storage.get('userCad').then(
       (data: any) => {
         
@@ -55,7 +74,7 @@ export class CadastroUsuarioPage implements OnInit {
         this.updateUser(objUser.user.uid, objUser.user.email, this.cadUserForm.value.numCelular);
 
         // Cadastrando o destino do usuário
-        this.cadUserForm.controls['idUser'].setValue({'userId': data});
+        this.cadUserForm.controls['idUser'].setValue({'userId': objUser.user});
         this.destinoService.addDestino(this.cadUserForm.value);
         this.router.navigateByUrl('/login');
         this.alertService.presentAlert('', 'Usuário cadastrado com sucesso!', ['OK'])

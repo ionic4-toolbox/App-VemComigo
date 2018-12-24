@@ -45,16 +45,6 @@ export class PerfilPage implements OnInit {
     });
   }
 
-  async presentAlert(title: string, msg: string, btn: Array<string> = ['OK', 'CANCELAR']) {
-    const alert = await this.alertController.create({
-      header: title,
-      message: msg,
-      buttons: btn
-    });
-
-    await alert.present();
-  }
-
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Deletar perfil',
@@ -90,6 +80,7 @@ export class PerfilPage implements OnInit {
         this.userService.getUsersId(usuario.email || usuario.user.email).subscribe(users => {
           console.log('Usuario encontrado: ', users);
           this.user = users[0];
+          this.storage.set('userAtual', JSON.stringify(this.user));
           if (users[0]) {
             if (this.user['$key']) {
               this.perfilForm.reset();
@@ -102,11 +93,12 @@ export class PerfilPage implements OnInit {
             }
           } else {
             this.router.navigate(['login']);
-            // this.presentAlert('Página Perfil', 'Não foi possível carregar os dados!', ['OK']);
           }
         });
       }
-    );
+    ).catch((error => {
+      this.alertService.presentAlert('Atenção', 'Não foi possivel carregar os dados' + error, ['OK']);
+    }));
   }
 
   tirarFoto() {
@@ -132,13 +124,14 @@ export class PerfilPage implements OnInit {
     if (this.perfilForm.invalid) {
       return;
     } else {
-
+      this.loadingService.present('Atualizando os dados. Aguarde ...');
       this.userService.updateUser(this.perfilForm.value.id, this.perfilForm.value).then(
-        data => {
-          this.presentAlert('Perfil', 'Perfil atualizado com sucesso!', ['OK']);
+        sucesso => {
+          this.alertService.presentAlert('Perfil', 'Perfil atualizado com sucesso!', ['OK']);
+          this.loadingService.dismiss();
         },
         error => {
-          this.presentAlert('Perfil', 'Perfil não foi atualizado! ' + error, ['OK']);
+          this.alertService.presentAlert('Perfil', 'Perfil não foi atualizado! ' + error, ['OK']);
         }
       );
 

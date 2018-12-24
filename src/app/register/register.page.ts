@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertService } from './../service/alert.service';
 import { AuthenticationService } from '../service/authentication.service';
@@ -55,9 +55,14 @@ export class RegisterPage {
       this.authenticationService.signUp(this.credenciais).then(
         (data: any) => {
           if ( data ) {
-            // this.cadastrarEmailUsuario(data.user.email, data.user.uid);
-            this.storage.set('userCad', JSON.stringify(data));
-            this.router.navigateByUrl('cadastro-usuario');
+            let navigationExtras: NavigationExtras = {
+              queryParams: { 'user': JSON.stringify(data) }
+            };
+            this.router.navigate(['cadastro-usuario'], navigationExtras);
+
+
+
+           // this.router.navigate(['cadastro-usuario', {'user': data}])
           }
         },
         error => {
@@ -68,18 +73,6 @@ export class RegisterPage {
       );
 
     }
-  }
-
-  cadastrarEmailUsuario(pEmail: string, pUid: string): void {
-
-    this.user = { id: pUid, nome: '', email: pEmail, telefone: '' };
-
-    this.userService.addUsers(this.user).then(
-      data => {
-        console.log('Resultado da inserção: ', data);
-      },
-      error => console.log('Erros encontrados: ', error)
-      );
   }
 
 }
