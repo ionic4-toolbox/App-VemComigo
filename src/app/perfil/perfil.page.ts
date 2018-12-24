@@ -8,6 +8,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { User } from '../models/user.model';
 import { UserService } from '../service/user.service';
 import { AuthenticationService } from '../service/authentication.service';
+import { AlertService } from '../service/alert.service';
+import { LoadingService } from '../service/loading.service';
+import { DestinoService } from '../service/destinos.service';
 
 @Component({
   selector: 'app-perfil',
@@ -18,6 +21,7 @@ export class PerfilPage implements OnInit {
   perfilForm: FormGroup;
   submitted = false;
   user: User;
+  bairros: Object;
 
   constructor(
     private fb: FormBuilder,
@@ -26,12 +30,15 @@ export class PerfilPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private camera: Camera,
-    private storage: Storage
+    private storage: Storage,
+    public alertService: AlertService,
+    public loadingService: LoadingService,
+    private destinoService: DestinoService
   ) {
     this.perfilForm = fb.group({
       id: [''],
       nome: [''],
-      Destino: [''],
+      destino: [1],
       horario: [''],
       email: [''],
       telefone: ['']
@@ -74,17 +81,21 @@ export class PerfilPage implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.getBairros();
+
     this.storage.get('userCurrent').then(
       (data: any) => {
         const usuario = JSON.parse(data);
         this.userService.getUsersId(usuario.email || usuario.user.email).subscribe(users => {
+          console.log('Usuario encontrado: ', users);
           this.user = users[0];
           if (users[0]) {
             if (this.user['$key']) {
               this.perfilForm.reset();
               this.perfilForm.controls['id'].setValue(this.user['$key']);
               this.perfilForm.controls['nome'].setValue(this.user['nome']);
-              this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
+              // this.perfilForm.controls['destino'].setValue(this.user['Destino']);
               this.perfilForm.controls['horario'].setValue(this.user['horario']);
               this.perfilForm.controls['email'].setValue(this.user['email']);
               this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
@@ -134,6 +145,20 @@ export class PerfilPage implements OnInit {
     }
   }
 
+  getBairros() {
+    this.loadingService.present();
+      
+    this.destinoService.getBairrosDestinos().subscribe(
+      bairro => {
+        this.bairros = bairro;
+        this.loadingService.dismiss();
+      }, 
+      error=> {
+        this.alertService.presentAlert('', 'Desculpe não foi possível carregar os dados!', ['OK'])
+      } 
+    );
+  }
+
   deletarperfil(mostrarMsg: boolean) {
 
     if (!mostrarMsg) {
@@ -156,4 +181,5 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['login']);
   }
 
+  
 }

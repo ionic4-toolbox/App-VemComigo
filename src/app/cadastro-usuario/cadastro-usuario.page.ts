@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { LoadingService } from '../service/loading.service';
 import { AlertService } from '../service/alert.service';
+import { UserService } from '../service/user.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -24,13 +26,16 @@ export class CadastroUsuarioPage implements OnInit {
     public alertService: AlertService,
     public loadingService: LoadingService,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private userService: UserService
   ) {
     this.cadUserForm = this.fb.group(
       {
         destino: [''],
         horarioOrigemSaida: [''],
         numCelular: [''],
+        meioTransporte: [''],
+        pontoEncontro: [''],
         idUser: ['']
       }
     );
@@ -43,12 +48,31 @@ export class CadastroUsuarioPage implements OnInit {
   onSubmit() {
     this.storage.get('userCad').then(
       (data: any) => {
+        
+        // Cadastrando os dados do usuario que vem desta tela
+        let objUser = JSON.parse(data);
+        // console.log(objUser.user, objUser.user.uid, objUser.user.email);
+        this.updateUser(objUser.user.uid, objUser.user.email, this.cadUserForm.value.numCelular);
+
+        // Cadastrando o destino do usuário
         this.cadUserForm.controls['idUser'].setValue({'userId': data});
         this.destinoService.addDestino(this.cadUserForm.value);
         this.router.navigateByUrl('/login');
         this.alertService.presentAlert('', 'Usuário cadastrado com sucesso!', ['OK'])
+
       }
     );
+  }
+
+  updateUser(pId: string, pEmail: string, pTel: string): void {
+    let user = { id: pId, nome: '', email: pEmail, telefone: pTel };
+    console.log(user);
+    this.userService.addUsers(user).then(
+      data => {
+        console.log('Resultado da inserção: ', data);
+      },
+      error => console.log('Erros encontrados: ', error)
+      );
   }
 
   getBairros() {
