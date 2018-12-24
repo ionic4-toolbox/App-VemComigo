@@ -2,11 +2,9 @@ import { Component } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertService } from './../service/alert.service';
-import { AuthenticationService } from '../service/authentication.service';
-import { User } from '../models/user.model';
+
 import { Credenciais } from '../models/credenciais.model';
-import { UserService } from '../service/user.service';
-import { Storage } from '@ionic/storage';
+import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -14,20 +12,16 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./register.page.scss']
 })
 export class RegisterPage {
-  user: User;
   signupError = '';
   submitted = false;
   credenciais: Credenciais;
   registerForm: FormGroup;
 
-
   constructor(
     fb: FormBuilder,
     private router: Router,
     private alertService: AlertService,
-    private userService: UserService,
-    private authenticationService: AuthenticationService,
-    private storage: Storage
+    private authenticationService: AuthenticationService
   ) {
     this.registerForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -49,21 +43,20 @@ export class RegisterPage {
     if (this.registerForm.invalid) {
       return;
     } else {
+
       const data = this.registerForm.value;
       this.credenciais = { email: data.email, password: data.password };
 
       this.authenticationService.signUp(this.credenciais).then(
         (data: any) => {
+
           if ( data ) {
             let navigationExtras: NavigationExtras = {
               queryParams: { 'user': JSON.stringify(data) }
             };
             this.router.navigate(['cadastro-usuario'], navigationExtras);
-
-
-
-           // this.router.navigate(['cadastro-usuario', {'user': data}])
           }
+          
         },
         error => {
           this.signupError = error.message;
@@ -71,7 +64,6 @@ export class RegisterPage {
           this.registerForm.reset();
         }
       );
-
     }
   }
 
