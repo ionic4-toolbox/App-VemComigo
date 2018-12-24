@@ -37,12 +37,13 @@
           <!-- <img src="assets/img/avatar-finn.png"> -->
           <ion-icon name="contact" style="font-size: 30px;"></ion-icon>
         </ion-avatar>
-        <ion-label>{{ item.idUser.userId.email }}  
+        <ion-label>
+          <span *ngIf="item.nome">{{ item.nome }}</span>
+          <span *ngIf="item.user.email">{{item.user.email }}</span>
         </ion-label>
-        <a href="https://wa.me/5561992296552" >
+        <a href="https://wa.me/55{{numCelular}}">
           <ion-icon name="logo-whatsapp" color="success" slot="end" style="font-size: 30px;"></ion-icon>
         </a>
-        
       </ion-item>
       <ion-item>
         <ion-icon color="danger" name="walk" slot="start"></ion-icon>

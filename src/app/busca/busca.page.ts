@@ -34,10 +34,10 @@ export class BuscaPage implements OnInit {
 
     // Pegando os dados de quem esta logado 
     this.storage.get('userAtual').then((user)=> {
-      this.user = user;
-      console.log(user.destino);
+      // console.log('Usuario logado: ', user['$key']);
+      // this.user = user;
       // Buscando os destinos
-      this.destinoService.getDestinos(user.destino).subscribe(
+      this.destinoService.getDestinos().subscribe(
         (data: any) => {
           this.destinos = data;
           console.log(data);

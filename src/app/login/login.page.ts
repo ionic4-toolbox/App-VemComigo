@@ -2,15 +2,16 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
-import { AuthenticationService } from '../service/authentication.service';
-import { LoadingController } from '@ionic/angular';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import * as firebase from 'firebase/app';
 import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from 'angularfire2/auth';
+
 import { User } from '../models/user.model';
 import { UserService } from '../service/user.service';
+import { AlertService } from './../service/alert.service';
+import { LoadingService } from './../service/loading.service';
+import { AuthenticationService } from '../service/authentication.service';
 
 const TOKEN_KEY = 'auth-token';
 
@@ -44,9 +45,9 @@ export class LoginPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
-    public alertController: AlertController,
+    public alertService: AlertService,
     private navCtrl: NavController,
-    public loadingController: LoadingController,
+    public loadingService: LoadingService,
     public facebook: Facebook,
     private router: Router,
     private storage: Storage,
@@ -60,24 +61,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() { }
-
-  async presentAlert(msg: string) {
-    const alert = await this.alertController.create({
-      header: 'Atenção',
-      message: msg,
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
-
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Aguarde ...',
-      duration: 2000
-    });
-    return await loading.present();
-  }
 
   // convenience getter for easy access to form fields
   get f() {
@@ -94,20 +77,19 @@ export class LoginPage implements OnInit {
     if (this.loginForm.invalid) {
       return;
     } else {
-      this.presentLoading();
+      this.loadingService.present('Aguarde ...')
       this.authService.signWithEmail(this.credentias).then(
-        () => {
-          console.log('Logado');
+        data => {
+          console.log('Logado' + data);
+          this.storage.set('userAtual', data)
         },
         error => {
           if (error.code === 'auth/wrong-password') {
-            this.presentAlert('Usuário ou senha invalido.');
+            this.alertService.presentAlert('Atenção', 'Usuário ou senha invalido.', ['OK']);
           } else if (error.code === 'auth/user-not-found') {
-            this.presentAlert(
-              'Não há registro de usuário correspondente a este identificador.'
-            );
+            this.alertService.presentAlert('Atenção', 'Não há registro de usuário correspondente a este identificador.', ['OK']);
           } else {
-            this.presentAlert('Erro encontrado: ' + error.message);
+            this.alertService.presentAlert('Atenção', 'Erro encontrado: ' + error.message, ['']);
           }
         }
       );
