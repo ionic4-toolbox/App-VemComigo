@@ -47,6 +47,7 @@ export class UserService {
     this._userCollection = this._af.collection<User>( config.collection_endpoint_user, x => x.where('email', '==' , email ));
     this.users = this._userCollection.snapshotChanges().pipe(
       map(actions => {
+        
         this.countItems = actions.length;
         return actions.map(action => ({
           $key: action.payload.doc.id,

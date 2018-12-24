@@ -4,13 +4,13 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
 import { AlertController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { Facebook } from '@ionic-native/facebook/ngx';
-import { NgxViacepService } from '@brunoc/ngx-viacep';
 
 import { User } from '../models/user.model';
 import { UserService } from '../service/user.service';
 import { AuthenticationService } from '../service/authentication.service';
-
+import { AlertService } from '../service/alert.service';
+import { LoadingService } from '../service/loading.service';
+import { DestinoService } from '../service/destinos.service';
 
 @Component({
   selector: 'app-perfil',
@@ -21,6 +21,7 @@ export class PerfilPage implements OnInit {
   perfilForm: FormGroup;
   submitted = false;
   user: User;
+  bairros: Object;
 
   constructor(
     private fb: FormBuilder,
@@ -29,28 +30,19 @@ export class PerfilPage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private camera: Camera,
-    private facebook: Facebook,
     private storage: Storage,
-    private viacep: NgxViacepService,
+    public alertService: AlertService,
+    public loadingService: LoadingService,
+    private destinoService: DestinoService
   ) {
     this.perfilForm = fb.group({
       id: [''],
       nome: [''],
-      Destino: [''],
+      destino: [1],
       horario: [''],
       email: [''],
       telefone: ['']
     });
-  }
-
-  async presentAlert(title: string, msg: string, btn: Array<string> = ['OK', 'CANCELAR']) {
-    const alert = await this.alertController.create({
-      header: title,
-      message: msg,
-      buttons: btn
-    });
-
-    await alert.present();
   }
 
   async presentAlertConfirm() {
@@ -79,29 +71,34 @@ export class PerfilPage implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.getBairros();
+
     this.storage.get('userCurrent').then(
       (data: any) => {
-
         const usuario = JSON.parse(data);
         this.userService.getUsersId(usuario.email || usuario.user.email).subscribe(users => {
+          console.log('Usuario encontrado: ', users);
           this.user = users[0];
+          this.storage.set('userAtual', JSON.stringify(this.user));
           if (users[0]) {
             if (this.user['$key']) {
               this.perfilForm.reset();
               this.perfilForm.controls['id'].setValue(this.user['$key']);
               this.perfilForm.controls['nome'].setValue(this.user['nome']);
-              this.perfilForm.controls['Destino'].setValue(this.user['Destino']);
+              // this.perfilForm.controls['destino'].setValue(this.user['Destino']);
               this.perfilForm.controls['horario'].setValue(this.user['horario']);
               this.perfilForm.controls['email'].setValue(this.user['email']);
               this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
             }
           } else {
             this.router.navigate(['login']);
-            // this.presentAlert('Página Perfil', 'Não foi possível carregar os dados!', ['OK']);
           }
         });
       }
-    );
+    ).catch((error => {
+      this.alertService.presentAlert('Atenção', 'Não foi possivel carregar os dados' + error, ['OK']);
+    }));
   }
 
   tirarFoto() {
@@ -127,17 +124,32 @@ export class PerfilPage implements OnInit {
     if (this.perfilForm.invalid) {
       return;
     } else {
-
+      this.loadingService.present('Atualizando os dados. Aguarde ...');
       this.userService.updateUser(this.perfilForm.value.id, this.perfilForm.value).then(
-        data => {
-          this.presentAlert('Perfil', 'Perfil atualizado com sucesso!', ['OK']);
+        sucesso => {
+          this.alertService.presentAlert('Perfil', 'Perfil atualizado com sucesso!', ['OK']);
+          this.loadingService.dismiss();
         },
         error => {
-          this.presentAlert('Perfil', 'Perfil não foi atualizado! ' + error, ['OK']);
+          this.alertService.presentAlert('Perfil', 'Perfil não foi atualizado! ' + error, ['OK']);
         }
       );
 
     }
+  }
+
+  getBairros() {
+    this.loadingService.present();
+      
+    this.destinoService.getBairrosDestinos().subscribe(
+      bairro => {
+        this.bairros = bairro;
+        this.loadingService.dismiss();
+      }, 
+      error=> {
+        this.alertService.presentAlert('', 'Desculpe não foi possível carregar os dados!', ['OK'])
+      } 
+    );
   }
 
   deletarperfil(mostrarMsg: boolean) {
@@ -162,4 +174,5 @@ export class PerfilPage implements OnInit {
     this.router.navigate(['login']);
   }
 
+  
 }

@@ -1,5 +1,9 @@
 Api para buscar lista de bairros que usei neste projeto:
 
+## Ciclo de vida IONIC
+https://blog.ionicframework.com/navigating-lifecycle-events/
+
+
 API - IBGE
 -----------------------
 http://servicodados.ibge.gov.br/api/v1/localidades/estados/35

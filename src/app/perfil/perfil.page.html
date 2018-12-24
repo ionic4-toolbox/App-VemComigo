@@ -13,7 +13,9 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating">Bairro*</ion-label>
-          <ion-input type="text" formControlName="Destino"></ion-input>
+            <ion-select formControlName="destino">
+              <ion-select-option *ngFor="let bairro of bairros" value="{{bairro.id}}">{{bairro.nome}}</ion-select-option>
+            </ion-select>    
         </ion-item>
         <ion-item>
           <ion-label position="floating">Horário de saída*</ion-label>

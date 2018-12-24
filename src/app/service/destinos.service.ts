@@ -42,7 +42,8 @@ export class DestinoService {
     
   }
 
-  getDestinos() {
+  getDestinos(id?: string) {
+    // this._destinoCollection = this._af.collection<Destino>( config.collection_endpoint_destinos, x => x.where('destino', '==' , id ));
     this.destinos = this._destinoCollection.snapshotChanges().pipe(
       map(actions => {
         this.countItems = actions.length;
