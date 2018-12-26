@@ -2,7 +2,8 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { DestinoService } from "../service/destinos.service";
 import { Router, ActivatedRoute } from "@angular/router";
-import { Storage } from "@ionic/storage";
+
+import { Transporte } from "../models/transporte.model";
 
 import { LoadingService } from "../service/loading.service";
 import { AlertService } from "../service/alert.service";
@@ -19,6 +20,7 @@ export class CadastroUsuarioPage implements OnInit {
   bairros: Object;
   origine: any;
   user = { id: "", nome: "", email: "", telefone: "" };
+  transporte: Transporte[];
 
   constructor(
     private fb: FormBuilder,
@@ -40,6 +42,10 @@ export class CadastroUsuarioPage implements OnInit {
   }
 
   ngOnInit() {
+
+    // Carregando os meios de transporte
+    this.transporte = [{ id: 1, nome: 'Carro'}, { id: 2, nome: 'Ônibus'}];
+
     // Pega os dados do registro inserido na tela de cadastro de usuario
     this.route.queryParams.subscribe(params => {
       const pUser = JSON.parse(params["user"]);

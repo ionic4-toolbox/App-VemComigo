@@ -9,7 +9,7 @@
       <ion-item>
         <ion-label position="floating">Vai pegar(ou dar) carona pra aonde?</ion-label>
         <ion-select formControlName="destino">
-          <ion-select-option *ngFor="let bairro of bairros"  value="{{bairro.id}}">{{bairro.nome}}</ion-select-option>
+          <ion-select-option *ngFor="let bairro of bairros"  [value]="bairro">{{bairro.nome}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
@@ -25,15 +25,14 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Chama as amigas no zap?</ion-label>
-        <ion-input formControlName="numCelular" type="text"></ion-input>
+        <ion-input type="tel" formControlName="numCelular"></ion-input>
       </ion-item>
       
       <!-- Meio de transporte -->
       <ion-item>
         <ion-label position="floating">Meio de transporte</ion-label>
         <ion-select formControlName="meioTransporte" okText="OK" cancelText="Cancelar">
-          <ion-select-option value="1">Carro</ion-select-option>
-          <ion-select-option value="2">Ônibus</ion-select-option>
+          <ion-select-option *ngFor="let transp of transporte" [value]="transp">{{ transp.nome }}</ion-select-option>
         </ion-select>
       </ion-item>
 

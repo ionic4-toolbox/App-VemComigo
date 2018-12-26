@@ -1,13 +1,31 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>#Ajuda</ion-title>
-  </ion-toolbar>
+  <ion-toolbar color="primary"> <ion-title>#Ajuda</ion-title> </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <!-- NEW -->
+  <ion-list>
+    <ion-item *ngFor="let item of information; let i = index" detail>
+      <ion-label text-wrap (click)="toggleSection(i)">
+        <ion-text color="dark">
+          <h3 style="font-size: 17.8px;" color="dark">{{ item.name }}</h3>
+        </ion-text>
+        <!-- <ion-text *ngIf="item.children && item.open">
+          <div *ngFor="let child of item.children; let j = index">
+            <p>{{ child.information }}</p>
+          </div>
+        </ion-text> -->
+        <ion-list *ngIf="item.children && item.open">
+          <ion-list-header *ngFor="let child of item.children; let j = index">
+          <ion-text>{{ child.information }}</ion-text>
+          </ion-list-header>
+        </ion-list>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-  <ion-card *ngFor="let item of information; let i = index">
+  <!-- OLD -->
+  <!-- <ion-card *ngFor="let item of information; let i = index">
     <ion-card-header>
       <ion-card-title style="font-size: 15px; font-weight: 700;" (click)="toggleSection(i)">
         {{ item.name }}
@@ -22,22 +40,5 @@
         </ion-list-header>
       </ion-list>
     </ion-card-content>
-  </ion-card>
-
-  <!-- OLD -->
-  <!-- <ion-list class="accordion-list">
-    <ion-list margin class="list-border" *ngFor="let item of information; let i = index" no-lines no-padding>
-      <ion-item class="hover-click  border-radius" (click)="toggleSection(i)" detail-none [ngClass]="{'section-active': item.open, 'section': !item.open}">
-        {{ item.name }}
-        <ion-icon class="float-right" name="ios-arrow-dropright" *ngIf="!item.open"></ion-icon>
-        <ion-icon class="float-right" name="ios-arrow-dropdown" *ngIf="item.open"></ion-icon>
-      </ion-item>
-      <ion-list *ngIf="item.children && item.open" no-lines>
-        <ion-list-header padding *ngFor="let child of item.children; let j = index" no-padding>
-          <ion-item>{{ child.information }}</ion-item>
-        </ion-list-header>
-      </ion-list>
-    </ion-list>
-  </ion-list> -->
-
+  </ion-card> -->
 </ion-content>
