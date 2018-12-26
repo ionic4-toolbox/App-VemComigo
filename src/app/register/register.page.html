@@ -11,7 +11,7 @@
   <div padding-top>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
       <div class="input">
-        <ion-input type="text" placeholder="Informe seu e-mail" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
+        <ion-input type="email" placeholder="Informe seu e-mail" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }"></ion-input>
       </div>
       <ion-item *ngIf="submitted && f.email.errors">
         <ion-text color="danger" *ngIf="f.email.errors.required">Você esqueceu de informar o e-mail</ion-text>
