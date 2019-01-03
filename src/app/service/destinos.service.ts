@@ -56,6 +56,21 @@ export class DestinoService {
     return this.destinos;
   }
 
+  // Filtra os destinos pelo email
+  getDestinosId(email?: any) {
+    this._destinoCollection = this._af.collection<Destino>( config.collection_endpoint_destinos, x => x.where('user.email', '==' , email ));
+    this.destinos = this._destinoCollection.snapshotChanges().pipe(
+      map(actions => {
+        this.countItems = actions.length;
+        return actions.map(action => ({
+          $key: action.payload.doc.id,
+          ...action.payload.doc.data()
+        }));
+      })
+    );
+    return this.destinos;
+  }
+
   getBairrosDestinos() {
     return this.http.get(this.configUrl);
   }

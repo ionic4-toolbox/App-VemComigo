@@ -1,3 +1,4 @@
+import { Destino } from './../models/destino.model';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -22,6 +23,7 @@ export class PerfilPage implements OnInit {
   submitted = false;
   user: User;
   bairros: Object;
+  destinos: Object
 
   constructor(
     private fb: FormBuilder,
@@ -94,6 +96,14 @@ export class PerfilPage implements OnInit {
           } else {
             this.router.navigate(['login']);
           }
+
+          // Pegando o bairro cadastrado e setando no select - Erro não esta funcionando corrigir aqui
+          this.destinoService.getDestinosId(this.user['email']).subscribe(destinos => {
+            this.destinos = destinos[0];
+            this.perfilForm.controls['destino'].setValue(destinos[0].destino);
+            console.log('Destinos: ', destinos[0].destino);
+          })
+
         });
       }
     ).catch((error => {
