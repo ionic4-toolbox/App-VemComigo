@@ -26,8 +26,7 @@ export class RegisterPage {
     this.registerForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-      passwordConfirmation: ['', Validators.compose([Validators.required, Validators.minLength(6)])
-      ]
+      passwordConfirmation: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
   }
 
@@ -49,14 +48,12 @@ export class RegisterPage {
 
       this.authenticationService.signUp(this.credenciais).then(
         (data: any) => {
-
           if ( data ) {
             let navigationExtras: NavigationExtras = {
               queryParams: { 'user': JSON.stringify(data) }
             };
             this.router.navigate(['cadastro-usuario'], navigationExtras);
           }
-          
         },
         error => {
           this.signupError = error.message;

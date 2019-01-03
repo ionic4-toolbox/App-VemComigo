@@ -46,13 +46,12 @@ export class AuthenticationService {
     return this._firebaseAuth.auth
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(data => {
-
-        console.log('Dados: ', data);
-
         this.storage.set('userCurrent', JSON.stringify(data));
         this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
           this.authenticationState.next(true);
         });
+      }).catch((error: any)=> {
+        console.log('Erro ao autenticar com o e-mail e senha.')
       });
   }
 
@@ -68,8 +67,7 @@ export class AuthenticationService {
     );
   }
 
-  signInWithFacebook(data?: any): void {
-    // alert('signInWithFacebook: ' + JSON.stringify(data))
+  signInWithFacebook(data?: any): any {
     this.storage.set('userCurrent', JSON.stringify(data)).then(() => {
       this.authenticationState.next(true);
     });
@@ -77,6 +75,7 @@ export class AuthenticationService {
       this.authenticationState.next(true);
     });
 
+    return data;
   }
 
   signInWithFacebookWeb() {
@@ -127,6 +126,10 @@ export class AuthenticationService {
     return this.storage.remove(TOKEN_KEY).then(() => {
       this.authenticationState.next(false);
     });
+
+    // Nova implementação
+    this._firebaseAuth.auth.signOut();
+
   }
 
   isAuthenticated() {

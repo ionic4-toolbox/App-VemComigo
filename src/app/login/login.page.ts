@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -35,7 +35,7 @@ export class Usuario extends Model {
   styleUrls: ['./login.page.scss']
 })
 
-export class LoginPage implements OnInit {
+export class LoginPage {
   loginForm: FormGroup;
   submitted = false;
   credentias: { email: any; password: any };
@@ -60,8 +60,6 @@ export class LoginPage implements OnInit {
     });
   }
 
-  ngOnInit() { }
-
   // convenience getter for easy access to form fields
   get f() {
     return this.loginForm.controls;
@@ -80,7 +78,6 @@ export class LoginPage implements OnInit {
       this.loadingService.present('Aguarde ...')
       this.authService.signWithEmail(this.credentias).then(
         data => {
-          console.log('Logado' + data);
           this.storage.set('userAtual', data)
         },
         error => {
@@ -104,11 +101,18 @@ export class LoginPage implements OnInit {
 
     return this.facebook.login(permissions)
       .then(response => {
-        // alert('Dados: ' + JSON.stringify(response));
+
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
+
         this._firebaseAuth.auth.signInWithCredential(facebookCredential).then((dados) => {
-          // alert('Dados: ' + JSON.stringify(dados));
-          // Cadastrando o usuario que veio do facebook
+          
+          // Vinculando a mais de um provedor
+          firebase.auth().currentUser.linkWithCredential(facebookCredential).then((user)=> {
+            console.log('OK');
+          }, (error) => {
+            console.log('ERROR');
+          })
+
           const users = {
             id: dados.uid,
             nome: dados.displayName,
@@ -119,24 +123,36 @@ export class LoginPage implements OnInit {
             telefone: 99999999
           };
 
-          // alert('dados: ' + JSON.stringify(users));
-
           this.userService.addUsers(users).then(
             data => {
-              console.log('Resultado da inserção: ', data);
+              this.alertService.presentAlert('Atenção', 'Resultado da inserção: ' + data, ['OK']);
             },
-            error => console.log('Erros encontrados: ', error)
+            error => {
+              this.alertService.presentAlert('Atenção', 'Error não foi possivel cadastrar o usuário' + error, ['OK']);
+            }
           );
 
-          // Guardando os dados na sessão
-          // this.storage.set('userCurrent', JSON.stringify(dados));
           this.authService.signInWithFacebook(dados);
-          this.router.navigateByUrl('/home');
-          // this.router.navigateByUrl('/home');
+
+          if ( users.id ) {
+            let navigationExtras: NavigationExtras = {
+              queryParams: { 'user': JSON.stringify(users) }
+            };
+            this.router.navigate(['cadastro-usuario'], navigationExtras);
+          }
+
         });
 
-      }).catch((error) => { alert('Error: ' + error); });
+      }).catch((error) => { 
+        // firebase.auth().currentUser.linkWithCredential(error).then((user)=> {
+        //   console.log('OK');
+        // }, (error) => {
+        //   console.log('ERROR');
+        // })
+        alert('Error: ' + error); 
+      });
   }
+
 
   logar(usuario: Usuario) {
     this.router.navigateByUrl('/home');
