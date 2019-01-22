@@ -16,6 +16,10 @@
     "nome": "Brás"
   },
   {
+    "id": 11,
+    "nome": "Casa Verde"
+  },
+  {
     "id": 5,
     "nome": "Consolação"
   },
@@ -38,10 +42,6 @@
   {
     "id": 10,
     "nome": "Sé"
-  },
-  {
-    "id": 11,
-    "nome": "Casa Verde"
   },
   {
     "id": 12,

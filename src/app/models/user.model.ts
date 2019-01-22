@@ -3,4 +3,8 @@ export class User {
   nome: string;
   telefone: string;
   email: string;
+  destino?: string;
+  horario_saida?:string;
+  transporte?: string;
+  ponto_encontro?: string
 }

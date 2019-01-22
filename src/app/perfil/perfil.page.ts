@@ -12,6 +12,9 @@ import { AuthenticationService } from '../service/authentication.service';
 import { AlertService } from '../service/alert.service';
 import { LoadingService } from '../service/loading.service';
 import { DestinoService } from '../service/destinos.service';
+import { Bairro } from '../models/bairro.model';
+import { IonicSelectableComponent } from 'ionic-selectable';
+
 
 @Component({
   selector: 'app-perfil',
@@ -22,8 +25,12 @@ export class PerfilPage implements OnInit {
   perfilForm: FormGroup;
   submitted = false;
   user: User;
+
+  destinos: Object;
+
+  ports: Bairro[];
+  port: Bairro;
   bairros: Object;
-  destinos: Object
 
   constructor(
     private fb: FormBuilder,
@@ -37,14 +44,23 @@ export class PerfilPage implements OnInit {
     public loadingService: LoadingService,
     private destinoService: DestinoService
   ) {
+
     this.perfilForm = fb.group({
       id: [''],
       nome: [''],
-      destino: [1],
-      horario: [''],
+      destino: [""],
+      horarioOrigemSaida: [''],
       email: [''],
       telefone: ['']
     });
+
+  }
+
+  portChange(event: {
+    component: IonicSelectableComponent,
+    value: any 
+  }) {
+    console.log('port:', event.value);
   }
 
   async presentAlertConfirm() {
@@ -76,33 +92,37 @@ export class PerfilPage implements OnInit {
 
     this.getBairros();
 
+
     this.storage.get('userCurrent').then(
       (data: any) => {
         const usuario = JSON.parse(data);
         this.userService.getUsersId(usuario.email || usuario.user.email).subscribe(users => {
-          console.log('Usuario encontrado: ', users);
+          
           this.user = users[0];
+          
           this.storage.set('userAtual', JSON.stringify(this.user));
-          if (users[0]) {
+          if (users) {
+            console.log('Dados usuario: ', this.user.destino) 
             if (this.user['$key']) {
               this.perfilForm.reset();
               this.perfilForm.controls['id'].setValue(this.user['$key']);
-              this.perfilForm.controls['nome'].setValue(this.user['nome']);
-              // this.perfilForm.controls['destino'].setValue(this.user['Destino']);
-              this.perfilForm.controls['horario'].setValue(this.user['horario']);
-              this.perfilForm.controls['email'].setValue(this.user['email']);
-              this.perfilForm.controls['telefone'].setValue(this.user['telefone']);
+              this.perfilForm.controls['nome'].setValue(this.user.nome);
+              this.perfilForm.controls['destino'].patchValue(this.user.destino);
+              this.perfilForm.controls['horarioOrigemSaida'].setValue(this.user.horario_saida);
+              this.perfilForm.controls['email'].setValue(this.user.email);
+              this.perfilForm.controls['telefone'].setValue(this.user.telefone);
+              console.log('Dados usuario: ', this.perfilForm.value, this.user);
             }
           } else {
             this.router.navigate(['login']);
           }
 
           // Pegando o bairro cadastrado e setando no select - Erro não esta funcionando corrigir aqui
-          this.destinoService.getDestinosId(this.user['email']).subscribe(destinos => {
-            this.destinos = destinos[0];
-            this.perfilForm.controls['destino'].setValue(destinos[0].destino);
-            console.log('Destinos: ', destinos[0].destino);
-          })
+          // this.destinoService.getDestinosId(this.user['email']).subscribe(destinos => {
+          //   this.destinos = destinos[0];
+          //   this.perfilForm.controls['destino'].setValue(destinos[0].destino['id']);
+           console.log('Destinos: ', this.perfilForm.controls['destino'].value);
+          // })
 
         });
       }
@@ -110,6 +130,11 @@ export class PerfilPage implements OnInit {
       this.alertService.presentAlert('Atenção', 'Não foi possivel carregar os dados' + error, ['OK']);
     }));
   }
+
+  get form () {
+    return this.perfilForm.controls;
+  }
+
 
   tirarFoto() {
     const options: CameraOptions = {
@@ -153,6 +178,7 @@ export class PerfilPage implements OnInit {
       
     this.destinoService.getBairrosDestinos().subscribe(
       bairro => {
+        console.log(bairro)
         this.bairros = bairro;
         this.loadingService.dismiss();
       }, 

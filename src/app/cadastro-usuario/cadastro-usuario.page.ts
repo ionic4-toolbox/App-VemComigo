@@ -19,7 +19,7 @@ export class CadastroUsuarioPage implements OnInit {
   isLoading = false;
   bairros: Object;
   origine: any;
-  user = { id: "", nome: "", email: "", telefone: "" };
+  user = { id: "", nome: "", email: "", destino: "", horario_saida: "", telefone: "", transporte: "", ponto_encontro: "" };
   transporte: Transporte[];
 
   constructor(
@@ -63,8 +63,12 @@ export class CadastroUsuarioPage implements OnInit {
 
   onSubmit() {
     // Mudando o valor do numero do telefone de acordo com o formulario de destino
+    this.user.destino = this.cadUserForm.value.destino;
+    this.user.horario_saida = this.cadUserForm.value.horarioOrigemSaida;
     this.user.telefone = this.cadUserForm.value.numCelular;
-
+    this.user.transporte = this.cadUserForm.value.meioTransporte;
+    this.user.ponto_encontro = this.cadUserForm.value.pontoEncontro;
+    
     // Cadastrando os dados do usuario que vem desta tela
     this.addUser();
 
@@ -76,6 +80,7 @@ export class CadastroUsuarioPage implements OnInit {
   }
 
   addUser(): void {
+    console.log('Úsuario: ', this.user);
     this.userService.addUsers(this.user).then(
       data => {
         console.log("Resultado da inserção: ", data);

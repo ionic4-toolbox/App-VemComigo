@@ -1,4 +1,4 @@
 export class Bairro {
-    id: string;
+    id: number;
     nome: string;
 }

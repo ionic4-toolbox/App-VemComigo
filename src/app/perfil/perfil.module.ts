@@ -10,6 +10,8 @@ import { NgxViacepModule } from '@brunoc/ngx-viacep';
 
 import { PerfilPage } from './perfil.page';
 import { UserService } from '../service/user.service';
+import { IonicSelectableModule } from 'ionic-selectable';
+import { BrMaskerModule } from 'br-mask';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { UserService } from '../service/user.service';
         component: PerfilPage
       }
     ]),
-    NgxViacepModule
+    NgxViacepModule,
+    IonicSelectableModule,
+    BrMaskerModule
   ],
   providers: [
     UserService,
