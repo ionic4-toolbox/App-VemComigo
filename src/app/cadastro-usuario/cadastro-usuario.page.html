@@ -6,12 +6,17 @@
 
   <div padding>
     <form [formGroup]="cadUserForm" (ngSubmit)="onSubmit()" novalidate>
-      <ion-item>
-        <ion-label position="floating">Vai pegar(ou dar) carona pra aonde?</ion-label>
-        <ion-select formControlName="destino">
-          <ion-select-option *ngFor="let bairro of bairros"  [value]="bairro">{{bairro.nome}}</ion-select-option>
-        </ion-select>
-      </ion-item>
+        <ion-item>
+            <ion-label position="floating">Vai pegar(ou dar) carona pra aonde?</ion-label>
+            <ionic-selectable
+              item-content
+              formControlName="destino"
+              [items]="bairros"
+              itemValueField="id"
+              itemTextField="nome"
+              [canSearch]="true">
+            </ionic-selectable>
+          </ion-item>
       <ion-item>
         <ion-label position="floating">Que horas a gente se encontra?</ion-label>
         <ion-select formControlName="horarioOrigemSaida" okText="OK" cancelText="Cancelar">
@@ -23,10 +28,15 @@
           <ion-select-option value="6">23:00 ás 00:00</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-label position="floating">Chama as amigas no zap?</ion-label>
         <ion-input type="tel" formControlName="numCelular"></ion-input>
-      </ion-item>
+      </ion-item> -->
+
+      <ion-item>
+          <ion-label position="floating">Chama as amigas no zap?</ion-label>
+          <ion-input type="tel" name="telefone" formControlName="numCelular" [brmasker]="{form: cadUserForm.get('numCelular'), phone: true}"></ion-input>
+        </ion-item>
       
       <!-- Meio de transporte -->
       <ion-item>

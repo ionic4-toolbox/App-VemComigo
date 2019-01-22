@@ -20,6 +20,9 @@ import { AuthGuardService } from './service/auth-guard.service';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { UserService } from './service/user.service';
+import { OrderModule } from 'ngx-order-pipe';
+
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +36,9 @@ import { UserService } from './service/user.service';
     AngularFireAuthModule,
     IonicStorageModule.forRoot(),
     HttpClientModule,
-    NgxViacepModule
+    NgxViacepModule,
+    OrderModule,
+    IonicSelectableModule
   ],
   providers: [
     StatusBar,
