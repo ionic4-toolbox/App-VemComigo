@@ -5,21 +5,19 @@
 <ion-content>
   <!-- NEW -->
   <ion-list>
-    <ion-item *ngFor="let item of information; let i = index" detail>
-      <ion-label text-wrap (click)="toggleSection(i)">
-        <ion-text color="dark">
-          <h3 style="font-size: 17.8px;" color="dark">{{ item.name }}</h3>
-        </ion-text>
+    <ion-item *ngFor="let item of information; let i = index" (click)="toggleSection(i)" lines="full">
+      <ion-label text-wrap>
+        <ion-text>{{ item.name }}</ion-text>
         <!-- <ion-text *ngIf="item.children && item.open">
           <div *ngFor="let child of item.children; let j = index">
             <p>{{ child.information }}</p>
           </div>
         </ion-text> -->
-        <ion-list *ngIf="item.children && item.open">
-          <ion-list-header *ngFor="let child of item.children; let j = index">
-          <ion-text>{{ child.information }}</ion-text>
-          </ion-list-header>
-        </ion-list>
+        <div *ngIf="item.children && item.open" style="background-color: #eee; border-radius: 4px;" margin-top padding>
+          <div *ngFor="let child of item.children; let j = index">
+          <ion-text color="secondary"><h1>{{ child.information }}</h1></ion-text>
+          </div>
+        </div>
       </ion-label>
     </ion-item>
   </ion-list>
