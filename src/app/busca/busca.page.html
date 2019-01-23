@@ -2,7 +2,6 @@
   <ion-toolbar color="primary">
     <ion-title>#Partiu achar uma amiga</ion-title>
     <ion-buttons slot="start" *ngIf="MostraBtnVoltar">
-      <!-- <ion-back-button (click)="onClick()"></ion-back-button> -->
       <ion-button (click)="exibirBusca(true, false)">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
@@ -10,15 +9,13 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Div da tela de busca inicial -->
 <ion-content padding class="content">
-
-  <!-- Div inicial com botão de buscar -->
   <div *ngIf="btnBuscar">
     <div class="imgBuscar" (click)="exibirBusca(false, true)">
       <img src="assets/img/buscar1.png" alt="logo buscar destinos">
     </div>
     <div class="btn-alterar-destino">
-      
       <ion-button fill="outline" expand="block" shape="round" (click)="editar()">
         Alterar destino
       </ion-button>
@@ -30,11 +27,11 @@
   </div>
 
   <!-- Div com resultado de buscas -->
+  <!-- {{ user | json }} -->
   <div *ngIf="!btnBuscar">
     <ion-card *ngFor="let item of user; let i = index" [attr.data-index]="i">
       <ion-item style="padding-bottom: 5px; padding-top: 15px;">
         <ion-avatar slot="start">
-          <!-- <img src="assets/img/avatar-finn.png"> -->
           <ion-icon name="contact" style="font-size: 30px;"></ion-icon>
         </ion-avatar>
         <ion-label>

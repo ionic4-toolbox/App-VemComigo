@@ -75,10 +75,10 @@ export class LoginPage {
     if (this.loginForm.invalid) {
       return;
     } else {
-      this.loadingService.present('Aguarde ...')
+      this.loadingService.present('Aguarde ...');
       this.authService.signWithEmail(this.credentias).then(
         data => {
-          this.storage.set('userAtual', data)
+          this.storage.set('userAtual', data);
         },
         error => {
           if (error.code === 'auth/wrong-password') {

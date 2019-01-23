@@ -1,4 +1,3 @@
-import { UserService } from './../service/user.service';
 import { User } from './../models/user.model';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
@@ -8,6 +7,7 @@ import { Destino } from './../models/destino.model';
 import { DestinoService } from '../service/destinos.service';
 import { LoadingService } from './../service/loading.service';
 import { AlertService } from './../service/alert.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-busca',
@@ -30,7 +30,7 @@ export class BuscaPage implements OnInit {
   ) { }
 
   ionViewWillEnter() {
-    console.log('Carreguei a página + ionViewWillEnter()')
+
     this.loadingService.present();
     this.MostraBtnVoltar = false;
 
@@ -42,7 +42,9 @@ export class BuscaPage implements OnInit {
       this.userService.getUsersMatch(usuario.email, usuario.destino).subscribe(dados => {
         filterUser = dados.filter(data => usuario.email !== data.email)
         this.user = filterUser;
-      });
+      },error => {
+        this.alertService.presentAlert('Atenção', 'Erro ao buscar os destinos: ' + error, ['OK'])
+      })
 
 
       // Buscando os destinos
@@ -55,6 +57,7 @@ export class BuscaPage implements OnInit {
       //   error => {
       //     this.alertService.presentAlert('Atenção', 'Erro ao buscar os destinos: ' + error, ['OK'])
       //   });
+      
     });
 
   }
