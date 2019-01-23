@@ -39,6 +39,7 @@ export class BuscaPage implements OnInit {
       // console.log('Usuario logado: ', user['$key']);
       const usuario = JSON.parse(user);
       let filterUser: User[];
+      // console.log(usuario.email, usuario.destino)
       this.userService.getUsersMatch(usuario.email, usuario.destino).subscribe(dados => {
         filterUser = dados.filter(data => usuario.email !== data.email)
         this.user = filterUser;

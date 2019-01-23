@@ -21,7 +21,7 @@ import { IonicSelectableComponent } from 'ionic-selectable';
   templateUrl: 'perfil.page.html',
   styleUrls: ['perfil.page.scss']
 })
-export class PerfilPage implements OnInit {
+export class PerfilPage {
   perfilForm: FormGroup;
   submitted = false;
   user: User;
@@ -88,11 +88,9 @@ export class PerfilPage implements OnInit {
     await alert.present();
   }
 
-  ngOnInit(): void {
+  ionViewWillEnter() {
 
     this.getBairros();
-
-
     this.storage.get('userCurrent').then(
       (data: any) => {
         const usuario = JSON.parse(data);

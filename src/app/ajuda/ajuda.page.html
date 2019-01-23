@@ -15,7 +15,7 @@
         </ion-text> -->
         <div *ngIf="item.children && item.open" style="background-color: #eee; border-radius: 4px;" margin-top padding>
           <div *ngFor="let child of item.children; let j = index">
-          <ion-text color="secondary"><h1>{{ child.information }}</h1></ion-text>
+          <ion-text color="secondary"><h2>{{ child.information }}</h2></ion-text>
           </div>
         </div>
       </ion-label>
