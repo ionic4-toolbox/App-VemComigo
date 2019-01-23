@@ -31,18 +31,17 @@
 
   <!-- Div com resultado de buscas -->
   <div *ngIf="!btnBuscar">
-    <ion-card *ngFor="let item of destinos; let i = index" [attr.data-index]="i">
+    <ion-card *ngFor="let item of user; let i = index" [attr.data-index]="i">
       <ion-item style="padding-bottom: 5px; padding-top: 15px;">
         <ion-avatar slot="start">
           <!-- <img src="assets/img/avatar-finn.png"> -->
           <ion-icon name="contact" style="font-size: 30px;"></ion-icon>
         </ion-avatar>
         <ion-label>
-          
-          <span *ngIf="item?.user?.nome">{{ item?.user?.nome }}</span>
-          <span *ngIf="item?.user?.email">{{item?.user?.email}}</span>
+          <h2>{{ item?.nome }}</h2>
+          <h2>{{item?.email}}</h2>
         </ion-label>
-        <a href="https://wa.me/55{{numCelular}}">
+        <a href="https://wa.me/{{item?.telefone}}">
           <!-- {{ item.user | json }} -->
           <ion-icon name="logo-whatsapp" color="success" slot="end" style="font-size: 30px;"></ion-icon>
         </a>
@@ -51,21 +50,21 @@
         <ion-icon color="danger" name="walk" slot="start"></ion-icon>
         <ion-label text-wrap>
           <small>Destino</small>
-          <h2>{{ item.destino.nome }}</h2>
+          <h2>{{ item?.destino?.nome }}</h2>
         </ion-label>
       </ion-item>
       <ion-item>
         <ion-icon color="danger" name="car" slot="start"></ion-icon>
         <ion-label text-wrap>
           <small>Meio de transporte</small>
-          <h2>{{ item?.meioTransporte?.nome }}</h2>
+          <h2>{{ item?.transporte?.nome }}</h2>
         </ion-label>
       </ion-item>
       <ion-item>
         <ion-icon color="danger" name="pin" slot="start"></ion-icon>
         <ion-label text-wrap>
           <small>Ponto de encontro</small>
-          <h2>{{ item.pontoEncontro }}</h2>
+          <h2>{{ item.ponto_encontro }}</h2>
         </ion-label>
       </ion-item>
     </ion-card>
