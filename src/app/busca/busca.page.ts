@@ -19,9 +19,7 @@ export class BuscaPage implements OnInit {
   destinos: Destino[];
   MostraBtnVoltar: boolean;
   user: User[];
-  filterDados: User[];
-  filterUser: User[];
-  
+
   constructor(
     private navCtrl: NavController,
     private alertService: AlertService,
@@ -36,42 +34,30 @@ export class BuscaPage implements OnInit {
     this.loadingService.present();
     this.MostraBtnVoltar = false;
 
-    // Pegando os dados de quem esta logado
-    this.storage.get('userAtual').then((user) => {
+    // Pegando os dados de quem esta logado 
+    this.storage.get('userAtual').then((user: any)=> {
+      // console.log('Usuario logado: ', user['$key']);
       const usuario = JSON.parse(user);
-      console.log('dados user: ', usuario.email, usuario.destino.nome);
-
+      let filterUser: User[];
       this.userService.getUsersMatch(usuario.email, usuario.destino).subscribe(dados => {
+        filterUser = dados.filter(data => usuario.email !== data.email)
+        this.user = filterUser;
+      },error => {
+        this.alertService.presentAlert('Atenção', 'Erro ao buscar os destinos: ' + error, ['OK'])
+      })
 
-        this.filterUser = dados.filter((data) => {
-          console.log('xxx: ', data.email, usuario.ssds, data.email !== usuario.email);
-          return data.email !== usuario.destino;
-        });
-        console.log('teste', this.filterUser);
-        this.user = this.filterUser;
-      });
 
-      // Buscando os dados de acordo com a seguinte regra:
-      /*
-        Buscar todos os usuarios diferentes do usuario logado, mas que tem o destino em comum
-      */
-
-      // this.userService.getUsers().subscribe(dados => {
-      //   this.user = dados;
-      //   this.loadingService.dismiss();
-      // }, error => {
-      //   this.alertService.presentAlert('Atenção', 'Erro ao buscar os destinos: ' + error, ['OK']);
-      // });
-
+      // Buscando os destinos
       // this.destinoService.getDestinos().subscribe(
       //   (data: any) => {
       //     this.destinos = data;
+      //     console.log(data);
       //     this.loadingService.dismiss();
       //   },
       //   error => {
       //     this.alertService.presentAlert('Atenção', 'Erro ao buscar os destinos: ' + error, ['OK'])
       //   });
-
+      
     });
 
   }

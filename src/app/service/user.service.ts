@@ -28,6 +28,24 @@ export class UserService {
     this._userCollection = _af.collection<User>( config.collection_endpoint_user, x => x.orderBy('nome', 'asc'));
   }
 
+  // Busca os dados dos usuários filtrando para que o match dê certo
+  getUsersMatch(email: string, destino: any) {
+    this._userCollection = this._af.collection<User>( config.collection_endpoint_user, x => x.where('destino', '==' , destino ));
+    this.users = this._userCollection.snapshotChanges().pipe(
+      map(actions => {
+        
+        this.countItems = actions.length;
+        return actions.map(action => ({
+          $key: action.payload.doc.id,
+          ...action.payload.doc.data()
+        }));
+      })
+    );
+    return this.users;
+
+  }
+
+
   // Busca os dados dos usuários
   getUsers() {
     this.users = this._userCollection.snapshotChanges().pipe(
@@ -41,23 +59,6 @@ export class UserService {
     );
     return this.users;
   }
-
-  getUsersMatch(email: string, destino: string) {
-    console.log('Email: ', email, destino);
-    this._userCollection = this._af.collection<User>( config.collection_endpoint_user, x => x.where('destino', '==' , destino ));
-    this.users = this._userCollection.snapshotChanges().pipe(
-      map(actions => {
-        this.countItems = actions.length;
-        return actions.map(action => ({
-          $key: action.payload.doc.id,
-          ...action.payload.doc.data()
-        }));
-      })
-    );
-    return this.users;
-
-  }
-
 
   getUsersId(email: string) {
     console.log('Email: ', email);
