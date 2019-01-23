@@ -42,6 +42,23 @@ export class UserService {
     return this.users;
   }
 
+  getUsersMatch(email: string, destino: string) {
+    console.log('Email: ', email, destino);
+    this._userCollection = this._af.collection<User>( config.collection_endpoint_user, x => x.where('destino', '==' , destino ));
+    this.users = this._userCollection.snapshotChanges().pipe(
+      map(actions => {
+        this.countItems = actions.length;
+        return actions.map(action => ({
+          $key: action.payload.doc.id,
+          ...action.payload.doc.data()
+        }));
+      })
+    );
+    return this.users;
+
+  }
+
+
   getUsersId(email: string) {
     console.log('Email: ', email);
     this._userCollection = this._af.collection<User>( config.collection_endpoint_user, x => x.where('email', '==' , email ));
