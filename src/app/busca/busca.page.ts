@@ -14,14 +14,14 @@ import { UserService } from '../service/user.service';
   templateUrl: './busca.page.html',
   styleUrls: ['./busca.page.scss'],
 })
-export class BuscaPage implements OnInit {
+export class BuscaPage {
   btnBuscar = true;
   destinos: Destino[];
   MostraBtnVoltar: boolean;
   user: User[];
   filterDados: User[];
   filterUser: User[];
-  
+
   constructor(
     private navCtrl: NavController,
     private alertService: AlertService,
@@ -39,8 +39,11 @@ export class BuscaPage implements OnInit {
     // Pegando os dados de quem esta logado
     this.storage.get('userAtual').then((user) => {
       const usuario = JSON.parse(user);
-      console.log('dados user: ', usuario.email, usuario.destino.nome);
 
+      /*
+        Buscando os dados de acordo com a seguinte regra:
+        Buscar todos os usuarios diferentes do usuario logado, mas que tem o destino em comum
+      */
       this.userService.getUsersMatch(usuario.email, usuario.destino).subscribe(dados => {
 
         this.filterUser = dados.filter((data) => {
@@ -51,34 +54,9 @@ export class BuscaPage implements OnInit {
         this.user = this.filterUser;
       });
 
-      // Buscando os dados de acordo com a seguinte regra:
-      /*
-        Buscar todos os usuarios diferentes do usuario logado, mas que tem o destino em comum
-      */
-
-      // this.userService.getUsers().subscribe(dados => {
-      //   this.user = dados;
-      //   this.loadingService.dismiss();
-      // }, error => {
-      //   this.alertService.presentAlert('Atenção', 'Erro ao buscar os destinos: ' + error, ['OK']);
-      // });
-
-      // this.destinoService.getDestinos().subscribe(
-      //   (data: any) => {
-      //     this.destinos = data;
-      //     this.loadingService.dismiss();
-      //   },
-      //   error => {
-      //     this.alertService.presentAlert('Atenção', 'Erro ao buscar os destinos: ' + error, ['OK'])
-      //   });
-
     });
 
   }
-
-  ionViewDidLoad() {}
-
-  ngOnInit() {}
 
   exibirBusca(pMostraBusca: boolean, pMostraBtnVoltar: boolean) {
     this.btnBuscar = pMostraBusca;
