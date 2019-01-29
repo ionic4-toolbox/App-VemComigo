@@ -95,12 +95,12 @@ export class PerfilPage {
       (data: any) => {
         const usuario = JSON.parse(data);
         this.userService.getUsersId(usuario.email || usuario.user.email).subscribe(users => {
-          
+
           this.user = users[0];
-          
+
           this.storage.set('userAtual', JSON.stringify(this.user));
           if (users) {
-            console.log('Dados usuario: ', this.user.destino) 
+            // console.log('Dados usuario: ', this.user.destino) 
             if (this.user['$key']) {
               this.perfilForm.reset();
               this.perfilForm.controls['id'].setValue(this.user['$key']);

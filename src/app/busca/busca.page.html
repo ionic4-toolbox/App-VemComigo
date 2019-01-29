@@ -9,12 +9,11 @@
   </ion-toolbar>
 </ion-header>
 
-
 <!-- Div da tela de busca inicial -->
 <ion-content padding class="content">
   <div *ngIf="btnBuscar">
     <div class="imgBuscar" (click)="exibirBusca(false, true)">
-      <img src="assets/img/buscar1.png" alt="logo buscar destinos">
+      <img src="assets/img/buscar1.png" alt="logo buscar destinos" />
     </div>
     <div class="btn-alterar-destino">
       <ion-button fill="outline" expand="block" shape="round" (click)="editar()">
@@ -28,13 +27,16 @@
   </div>
 
   <!-- Div com resultado de buscas -->
-  <!-- {{ user | json }} -->
   <div *ngIf="!btnBuscar">
-
-    <div *ngIf="!user" padding text-center>
-      <p>Nenhum registro encontrado!</p>
+    <!-- {{ user | json }}
+    {{ user.length }} -->
+    <div *ngIf="!user.length" padding text-center>
+      <div class="error-notice">
+        <div class="oaerror danger">
+          <strong>Nenhum registro encontrado!</strong>
+        </div>
+      </div>
     </div>
-
     <ion-card *ngFor="let item of user; let i = index" [attr.data-index]="i">
       <ion-item style="padding-bottom: 5px; padding-top: 15px;">
         <ion-avatar slot="start">
@@ -42,11 +44,15 @@
         </ion-avatar>
         <ion-label>
           <h2>{{ item?.nome }}</h2>
-          <h2>{{item?.email}}</h2>
+          <h2>{{ item?.email }}</h2>
         </ion-label>
-        <a href="https://wa.me/55{{item?.telefone}}">
-          <!-- {{ item.user | json }} -->
-          <ion-icon name="logo-whatsapp" color="success" slot="end" style="font-size: 30px;"></ion-icon>
+        <a href="https://wa.me/55{{ item?.telefone }}">
+          <ion-icon
+            name="logo-whatsapp"
+            color="success"
+            slot="end"
+            style="font-size: 30px;"
+          ></ion-icon>
         </a>
       </ion-item>
       <ion-item>

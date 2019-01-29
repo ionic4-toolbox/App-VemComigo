@@ -12,9 +12,9 @@ import { UserService } from '../service/user.service';
 @Component({
   selector: 'app-busca',
   templateUrl: './busca.page.html',
-  styleUrls: ['./busca.page.scss'],
+  styleUrls: ['./busca.page.scss']
 })
-export class BuscaPage implements OnInit {
+export class BuscaPage {
   btnBuscar = true;
   destinos: Destino[];
   MostraBtnVoltar: boolean;
@@ -27,49 +27,46 @@ export class BuscaPage implements OnInit {
     private destinoService: DestinoService,
     private userService: UserService,
     private storage: Storage
-  ) { }
+  ) {}
 
   ionViewWillEnter() {
-
     this.loadingService.present();
     this.MostraBtnVoltar = false;
+    this.btnBuscar = true;
+    this.getUser();
+  }
 
-    // Pegando os dados de quem esta logado 
-    this.storage.get('userAtual').then((user: any)=> {
+  getUser() {
+    // Pegando os dados de quem esta logado
+    this.storage.get('userAtual').then((user: any) => {
       // console.log('Usuario logado: ', user['$key']);
       const usuario = JSON.parse(user);
       let filterUser: User[];
       // console.log(usuario.email, usuario.destino)
-      this.userService.getUsersMatch(usuario.email, usuario.destino).subscribe(dados => {
-        filterUser = dados.filter(data => usuario.email !== data.email)
-        this.user = filterUser;
-      },error => {
-        this.alertService.presentAlert('Atenção', 'Erro ao buscar os destinos: ' + error, ['OK'])
-      })
-
-
-      // Buscando os destinos
-      // this.destinoService.getDestinos().subscribe(
-      //   (data: any) => {
-      //     this.destinos = data;
-      //     console.log(data);
-      //     this.loadingService.dismiss();
-      //   },
-      //   error => {
-      //     this.alertService.presentAlert('Atenção', 'Erro ao buscar os destinos: ' + error, ['OK'])
-      //   });
-      
+      this.userService.getUsersMatch(usuario.email, usuario.destino).subscribe(
+        dados => {
+          filterUser = dados.filter(data => usuario.email !== data.email);
+          this.user = filterUser;
+        },
+        error => {
+          this.alertService.presentAlert(
+            'Atenção',
+            'Erro ao buscar os destinos: ' + error,
+            ['OK']
+          );
+        }
+      );
     });
-
   }
 
-  ionViewDidLoad() {}
-
-  ngOnInit() {}
-
   exibirBusca(pMostraBusca: boolean, pMostraBtnVoltar: boolean) {
+    this.getUser();
     this.btnBuscar = pMostraBusca;
     this.MostraBtnVoltar = pMostraBtnVoltar;
+  }
+
+  verificaDados() {
+    return this.user.length;
   }
 
   editar() {
@@ -79,5 +76,4 @@ export class BuscaPage implements OnInit {
   ajuda() {
     this.navCtrl.navigateRoot('/home/tabs/(ajuda:ajuda)');
   }
-
 }

@@ -105,27 +105,21 @@ export class LoginPage {
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
 
         this._firebaseAuth.auth.signInWithCredential(facebookCredential).then((dados) => {
-          
-          // Vinculando a mais de um provedor
-          firebase.auth().currentUser.linkWithCredential(facebookCredential).then((user)=> {
-            console.log('OK');
-          }, (error) => {
-            console.log('ERROR');
-          })
 
           const users = {
             id: dados.uid,
             nome: dados.displayName,
-            sobrenome: dados.displayName,
-            turma: '',
-            horario: '',
             email: dados.email,
-            telefone: 99999999
+            destino: '',
+            horario_saida: '',
+            telefone: '',
+            transporte: '',
+            ponto_encontro: ''
           };
 
           this.userService.addUsers(users).then(
             data => {
-              this.alertService.presentAlert('Atenção', 'Resultado da inserção: ' + data, ['OK']);
+              // this.alertService.presentAlert('Atenção', 'Resultado da inserção: ' + data, ['OK']);
             },
             error => {
               this.alertService.presentAlert('Atenção', 'Error não foi possivel cadastrar o usuário' + error, ['OK']);
@@ -143,13 +137,8 @@ export class LoginPage {
 
         });
 
-      }).catch((error) => { 
-        // firebase.auth().currentUser.linkWithCredential(error).then((user)=> {
-        //   console.log('OK');
-        // }, (error) => {
-        //   console.log('ERROR');
-        // })
-        alert('Error: ' + error); 
+      }).catch((error) => {
+        this.alertService.presentAlert('Erro', 'Não foi possivel conectar no facebook', ['OK']);
       });
   }
 
