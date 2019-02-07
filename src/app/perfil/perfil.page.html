@@ -25,12 +25,12 @@
       <ion-item>
           <ion-label position="floating">Que horas a gente se encontra?</ion-label>
           <ion-select formControlName="horarioOrigemSaida" okText="OK" cancelText="Cancelar">
-            <ion-select-option value="1">18:00 ás 19:00</ion-select-option>
-            <ion-select-option value="2">19:00 ás 20:00</ion-select-option>
-            <ion-select-option value="3">20:00 ás 21:00</ion-select-option>
-            <ion-select-option value="4">21:00 ás 22:00</ion-select-option>
-            <ion-select-option value="5">22:00 ás 23:00</ion-select-option>
-            <ion-select-option value="6">23:00 ás 00:00</ion-select-option>
+            <ion-select-option value="1">18:00 às 19:00</ion-select-option>
+            <ion-select-option value="2">19:00 às 20:00</ion-select-option>
+            <ion-select-option value="3">20:00 às 21:00</ion-select-option>
+            <ion-select-option value="4">21:00 às 22:00</ion-select-option>
+            <ion-select-option value="5">22:00 às 23:00</ion-select-option>
+            <ion-select-option value="6">23:00 às 00:00</ion-select-option>
           </ion-select>
         </ion-item>
       <ion-item>
@@ -42,8 +42,8 @@
         <ion-input type="text" name="telefone" formControlName="telefone" [brmasker]="{form: perfilForm.get('telefone'), phone: true}"></ion-input>
       </ion-item>
     </ion-list>
-    <ion-grid fixed>
-      <ion-row padding>
+    <ion-grid fixed padding>
+      <ion-row>
           <ion-col>
           <ion-button button shape="round" expand="full" type="submit">Atualizar</ion-button>
           <ion-button shape="round" fill="outline" expand="full" color="secondary" (click)="deletarperfil(false)" type="button">Deletar</ion-button>
