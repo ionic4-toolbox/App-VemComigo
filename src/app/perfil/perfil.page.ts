@@ -161,16 +161,20 @@ export class PerfilPage {
     if (!mostrarMsg) {
       this.presentAlertConfirm();
     } else {
+      debugger
+      this.authenticationService.deleteProfile();
       this.userService.deleteUsers(this.user['$key']).then(
         () => {
           // Chamando a função para deletar o usuario da tabela de autenticacao do firestone
-          this.authenticationService.deleteProfile();
           this.router.navigate(['login']);
         },
         error => {
           this.alertService.presentAlert('', 'Desculpe não foi possível deletar o perfil! ' + error, ['OK']);
         }
       );
+
+      this.authenticationService.logout();
+
     }
 
   }

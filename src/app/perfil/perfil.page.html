@@ -44,11 +44,12 @@
     </ion-list>
     <ion-grid fixed padding>
       <ion-row>
-          <ion-col>
-          <ion-button button shape="round" expand="full" type="submit">Atualizar</ion-button>
-          <ion-button shape="round" fill="outline" expand="full" color="secondary" (click)="deletarperfil(false)" type="button">Deletar</ion-button>
-          <!-- <ion-button button shape="round" expand="full" color="secondary" (click)="deletarperfil(false)" type="button">Deletar</ion-button> -->
-          <ion-button shape="round" fill="outline" expand="full" color="secondary" (click)="logout()" type="button">Sair</ion-button>
+          <ion-col style="margin-bottom: 10px;">
+              <div class="btn-alterar-destino">
+                  <ion-button button shape="round" expand="full" type="submit">Atualizar</ion-button>
+                  <ion-button fill="outline" expand="full" shape="round" (click)="deletarperfil(false)" type="button">Deletar</ion-button>
+                  <ion-button fill="outline" expand="full" shape="round" (click)="logout()" type="button">Sair</ion-button>
+            </div>
         </ion-col>
       </ion-row>
     </ion-grid>

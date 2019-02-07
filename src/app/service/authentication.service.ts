@@ -1,3 +1,4 @@
+import { AlertService } from './alert.service';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
@@ -21,7 +22,8 @@ export class AuthenticationService {
     private storage: Storage,
     private plt: Platform,
     private _firebaseAuth: AngularFireAuth,
-    private userService: UserService
+    private userService: UserService,
+    private alertService: AlertService
   ) {
     this.user = _firebaseAuth.authState;
     this.plt.ready().then(() => {
@@ -50,7 +52,7 @@ export class AuthenticationService {
           this.authenticationState.next(true);
         });
       }).catch((error: any) => {
-        console.log('Erro ao autenticar com o e-mail e senha.')
+        this.alertService.presentAlert('', 'O usuário não esta cadastrado no sistema. Por favor! Cadastre-se;', ['OK']);
       });
   }
 
