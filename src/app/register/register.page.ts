@@ -5,6 +5,7 @@ import { AlertService } from './../service/alert.service';
 
 import { Credenciais } from '../models/credenciais.model';
 import { AuthenticationService } from '../service/authentication.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,8 @@ export class RegisterPage {
     fb: FormBuilder,
     private router: Router,
     private alertService: AlertService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    public navCtrl: NavController
   ) {
     this.registerForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -47,13 +49,15 @@ export class RegisterPage {
       this.credenciais = { email: data.email, password: data.password };
 
       this.authenticationService.signUp(this.credenciais).then(
-        (data: any) => {
+        (data) => {
           if ( data ) {
-            let navigationExtras: NavigationExtras = {
-              queryParams: { 'user': JSON.stringify(data) }
-            };
-            this.router.navigate(['cadastro-usuario'], navigationExtras);
+             const navigationExtras: NavigationExtras = {
+               queryParams: { 'user': JSON.stringify(data) }
+             };
+            // this.router.navigate(['cadastro-usuario'], navigationExtras); // OLD
+            this.navCtrl.navigateForward(['cadastro-usuario'], false, navigationExtras); // NEW
           }
+
         },
         error => {
           this.signupError = error.message;

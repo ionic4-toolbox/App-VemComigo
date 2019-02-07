@@ -7,8 +7,4 @@ import { Component } from '@angular/core';
 })
 export class QuemSomosPage {
 
-  logout() {
-    console.log('Fazer logout');
-  }
-
 }

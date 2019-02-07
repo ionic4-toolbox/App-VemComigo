@@ -1,10 +1,10 @@
-export class User {
+export interface User {
   id: string;
   nome: string;
   telefone: string;
   email: string;
   destino?: string;
-  horario_saida?:string;
+  horarioOrigemSaida?: string;
   transporte?: string;
-  ponto_encontro?: string
+  ponto_encontro?: string;
 }

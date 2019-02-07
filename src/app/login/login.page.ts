@@ -111,7 +111,7 @@ export class LoginPage {
             nome: dados.displayName,
             email: dados.email,
             destino: '',
-            horario_saida: '',
+            horarioOrigemSaida: '',
             telefone: '',
             transporte: '',
             ponto_encontro: ''
@@ -129,7 +129,7 @@ export class LoginPage {
           this.authService.signInWithFacebook(dados);
 
           if ( users.id ) {
-            let navigationExtras: NavigationExtras = {
+            const navigationExtras: NavigationExtras = {
               queryParams: { 'user': JSON.stringify(users) }
             };
             this.router.navigate(['cadastro-usuario'], navigationExtras);

@@ -53,7 +53,6 @@ export class AppComponent {
   }
 
   logout() {
-    console.log('Logout()');
     this.authenticationService.logout();
     this.router.navigate(['login']);
   }

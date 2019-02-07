@@ -27,7 +27,6 @@ describe('CadastroUsuarioPage', () => {
 
   fit('Deve buscar um cep na api', ()=> {
     component.getBairros()
-    console.log('Deve buscar um cep na api');
   })
 
 });

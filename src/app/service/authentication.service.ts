@@ -24,7 +24,6 @@ export class AuthenticationService {
     private userService: UserService
   ) {
     this.user = _firebaseAuth.authState;
-    console.log(this.user);
     this.plt.ready().then(() => {
       this.checkToken();
     });
@@ -50,7 +49,7 @@ export class AuthenticationService {
         this.storage.set(TOKEN_KEY, 'Bearer 1234567').then(() => {
           this.authenticationState.next(true);
         });
-      }).catch((error: any)=> {
+      }).catch((error: any) => {
         console.log('Erro ao autenticar com o e-mail e senha.')
       });
   }
@@ -98,9 +97,6 @@ export class AuthenticationService {
           telefone: 99999999
         };
 
-        console.log('dados: ', dadosList.user);
-        console.log('Destino: ', users);
-
         this.userService.addUsers(users).then(
           data => {
             console.log('Resultado da inserção: ', data);
@@ -141,11 +137,11 @@ export class AuthenticationService {
   }
 
   deleteProfile() {
-    var user = this._firebaseAuth.auth.currentUser;
+    const user = this._firebaseAuth.auth.currentUser;
     user.delete().then((dados: any) => {
-      console.log('Usuário deletado com sucesso!')
+      console.log('Usuário deletado com sucesso!');
     }).catch((error: Error) => {
-      console.log('Não foi possível deletar o usuário!', error)
+      console.log('Não foi possível deletar o usuário!', error);
     });
   }
 

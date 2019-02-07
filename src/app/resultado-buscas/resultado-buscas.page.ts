@@ -13,10 +13,7 @@ export class ResultadoBuscasPage implements OnInit {
   constructor(private destinoService: DestinoService) { }
 
   ngOnInit() {
-    this.destinoService.getDestinos().subscribe(data => {
-      this.destinos = data;
-      console.log(data);
-    });
+    this.destinoService.getDestinos().subscribe(data => this.destinos = data);
   }
 
 }
