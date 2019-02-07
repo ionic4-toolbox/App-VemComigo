@@ -81,6 +81,8 @@ export class LoginPage {
           this.storage.set('userAtual', data);
         },
         error => {
+          this.alertService.presentAlert('', 'O usuário não esta cadastrado no sistema. Por favor! Cadastre-se;' + error, ['OK']);
+
           if (error.code === 'auth/wrong-password') {
             this.alertService.presentAlert('Atenção', 'Usuário ou senha invalido.', ['OK']);
           } else if (error.code === 'auth/user-not-found') {

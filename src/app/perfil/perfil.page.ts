@@ -73,7 +73,7 @@ export class PerfilPage {
         }, {
           text: 'SIM',
           handler: () => {
-            this.deletarperfil(true);
+            this.deletarperfil(true, this.user.id);
           }
         }
       ]
@@ -157,13 +157,14 @@ export class PerfilPage {
     );
   }
 
-  deletarperfil(mostrarMsg: boolean) {
+  deletarperfil(mostrarMsg: boolean, id: string) {
+    debugger
     if (!mostrarMsg) {
       this.presentAlertConfirm();
     } else {
       debugger
       this.authenticationService.deleteProfile();
-      this.userService.deleteUsers(this.user['$key']).then(
+      this.userService.deleteUsers(id).then(
         () => {
           // Chamando a função para deletar o usuario da tabela de autenticacao do firestone
           this.router.navigate(['login']);
