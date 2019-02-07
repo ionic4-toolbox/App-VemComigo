@@ -158,7 +158,6 @@ export class PerfilPage {
   }
 
   deletarperfil(mostrarMsg: boolean) {
-
     if (!mostrarMsg) {
       this.presentAlertConfirm();
     } else {

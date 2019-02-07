@@ -33,10 +33,11 @@ export class BuscaPage {
     this.loadingService.present();
     this.MostraBtnVoltar = false;
     this.btnBuscar = true;
-    this.getUser();
+    // this.getUser();
   }
 
   getUser() {
+    console.log('Passei aqui');
     // Pegando os dados de quem esta logado
     this.storage.get('userAtual').then((user: any) => {
       const usuario = JSON.parse(user);

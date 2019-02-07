@@ -78,6 +78,7 @@ export class LoginPage {
       this.loadingService.present('Aguarde ...');
       this.authService.signWithEmail(this.credentias).then(
         data => {
+          console.log('Resultado: ', data);
           this.storage.set('userAtual', data);
         },
         error => {

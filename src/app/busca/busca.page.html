@@ -6,6 +6,11 @@
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+        <ion-button (click)="getUser()" *ngIf="MostraBtnVoltar">
+          <ion-icon name="refresh"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -30,7 +35,7 @@
   <div *ngIf="!btnBuscar">
     <!-- {{ user | json }}
     {{ user.length }} -->
-    <div *ngIf="!user.length" padding text-center>
+    <div *ngIf="!user?.length" padding text-center>
       <div class="error-notice">
         <div class="oaerror danger">
           <strong>Nenhum registro encontrado!</strong>
