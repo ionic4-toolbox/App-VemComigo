@@ -19,6 +19,7 @@
   <div *ngIf="btnBuscar">
     <div class="imgBuscar" (click)="exibirBusca(false, true)">
       <img src="assets/img/buscar1.png" alt="logo buscar destinos" />
+      <!-- <ion-img src="assets/img/buscar1.png" alt="logo buscar destinos"></ion-img> -->
     </div>
     <div class="btn-alterar-destino">
       <ion-button fill="outline" expand="block" shape="round" (click)="editar()">
@@ -33,8 +34,6 @@
 
   <!-- Div com resultado de buscas -->
   <div *ngIf="!btnBuscar">
-    <!-- {{ user | json }}
-    {{ user.length }} -->
     <div *ngIf="!user?.length" padding text-center>
       <div class="error-notice">
         <div class="oaerror danger">

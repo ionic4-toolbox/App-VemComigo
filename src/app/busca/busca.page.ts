@@ -1,5 +1,5 @@
 import { User } from './../models/user.model';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
@@ -37,24 +37,21 @@ export class BuscaPage {
   }
 
   getUser() {
-    console.log('Passei aqui');
     // Pegando os dados de quem esta logado
     this.storage.get('userAtual').then((user: any) => {
       const usuario = JSON.parse(user);
       let filterUser: User[];
-      this.userService.getUsersMatch(usuario.email, usuario.destino).subscribe(
-        dados => {
-          filterUser = dados.filter(data => usuario.email !== data.email);
-          this.user = filterUser;
-        },
-        error => {
-          this.alertService.presentAlert(
-            'Atenção',
-            'Erro ao buscar os destinos: ' + error,
-            ['OK']
-          );
-        }
-      );
+      if ( usuario ) {
+        this.userService.getUsersMatch(usuario.email, usuario.destino).subscribe(
+          dados => {
+            filterUser = dados.filter(data => usuario.email !== data.email);
+            this.user = filterUser;
+          },
+          error => {
+            this.alertService.presentAlert('Atenção', 'Erro ao buscar os destinos: ' + error, ['OK']);
+          }
+        );
+      }
     });
   }
 
@@ -75,4 +72,5 @@ export class BuscaPage {
   ajuda() {
     this.navCtrl.navigateRoot('/home/tabs/(ajuda:ajuda)');
   }
+
 }

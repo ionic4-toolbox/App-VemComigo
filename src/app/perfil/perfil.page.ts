@@ -93,7 +93,7 @@ export class PerfilPage {
           this.user = users[0];
           this.storage.set('userAtual', JSON.stringify(this.user));
 
-          if (users) {
+          if (this.user) {
 
             if (this.user['$key']) {
               this.perfilForm.reset();
@@ -158,11 +158,9 @@ export class PerfilPage {
   }
 
   deletarperfil(mostrarMsg: boolean, id: string) {
-    debugger
     if (!mostrarMsg) {
       this.presentAlertConfirm();
     } else {
-      debugger
       this.authenticationService.deleteProfile();
       this.userService.deleteUsers(id).then(
         () => {
